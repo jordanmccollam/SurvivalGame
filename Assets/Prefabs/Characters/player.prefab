@@ -768,7 +768,7 @@ MonoBehaviour:
   blinkTime: 3
   health: 3
   speed: 40
-  tiptoeSpeed: 20
+  tiptoeSpeed: 15
   jumpForce: 60
   jumpTime: 0.2
   groundCheck: {fileID: 4225210722481374109}

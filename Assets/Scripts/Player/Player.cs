@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     bool facingRight = true;
     bool isGrounded = false;
     bool isTiptoeing = false;
+    bool isStunned = false;
     // ----------
 
     // COMPONENTS ---
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         healthUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<Health>();
-        healthUI.UpdateUI(health);
+        healthUI.AddHearts(health);
 
         InvokeRepeating("Blink", blinkTime, blinkTime);
     }
@@ -91,32 +92,38 @@ public class Player : MonoBehaviour
         }
         isGrounded = _isGrounded;
         
-
         // Fall damage stuff
         if (!wasFalling && isFalling) startOfFall = transform.position.y;
     }
 
     void Move() {
-        // Move horizontally only
-        rb.velocity = new Vector2(Mathf.Round(input.x) * (isTiptoeing ? tiptoeSpeed : speed), rb.velocity.y);
+        if (!isStunned) {
+            // Move horizontally only
+            rb.velocity = new Vector2(Mathf.Round(input.x) * (isTiptoeing ? tiptoeSpeed : speed), rb.velocity.y);
 
-        // if moving, use run anim
-        if (input.x == 0) { 
+            // if moving, use run anim
+            if (input.x == 0) { 
+                anim.SetBool("isTiptoeing", false); 
+                anim.SetBool("isRunning", false);
+            } else {
+                if (isTiptoeing) {
+                    anim.SetBool("isTiptoeing", true); 
+                } else {
+                    anim.SetBool("isRunning", true);
+                }
+            }
+
+            // Flip sprite if necessary
+            if (input.x > 0 && !facingRight) {
+                Flip();
+            } else if (input.x < 0 && facingRight) {
+                Flip();
+            }
+        } else {
+            // If stunned, set horizontal movement to 0 and stop running anims
+            rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetBool("isTiptoeing", false); 
             anim.SetBool("isRunning", false);
-        } else {
-            if (isTiptoeing) {
-                anim.SetBool("isTiptoeing", true); 
-            } else {
-                anim.SetBool("isRunning", true);
-            }
-        }
-
-        // Flip sprite if necessary
-        if (input.x > 0 && !facingRight) {
-            Flip();
-        } else if (input.x < 0 && facingRight) {
-            Flip();
         }
     }
 
@@ -130,7 +137,7 @@ public class Player : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context) {
-        if (context.started && isGrounded) { // On button down, jump
+        if (context.started && isGrounded && !isStunned) { // On button down, jump
             isJumping = true;
             jumpTimeCounter = jumpTime;
             anim.SetTrigger("takeOff");
@@ -143,7 +150,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage) {
         health -= damage;
-        healthUI.UpdateUI(health);
+        healthUI.RemoveHearts(damage);
+        Stun();
+        anim.SetTrigger("takeDamage");
     }
 
     bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
@@ -156,5 +165,12 @@ public class Player : MonoBehaviour
         if (context.canceled) {
             isTiptoeing = false;
         }
+    }
+
+    void Stun() {
+        isStunned = true;
+    }
+    public void ResetStun() {
+        isStunned = false;
     }
 }

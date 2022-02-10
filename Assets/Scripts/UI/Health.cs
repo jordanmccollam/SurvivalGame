@@ -11,19 +11,21 @@ public class Health : MonoBehaviour
     public List<GameObject> currentHearts;
     int numOfHearts = 0;
 
-    public void UpdateUI(int playerHealth) {
-        for (var i = 0; i < (playerHealth > numOfHearts ? playerHealth : numOfHearts); i++)
+    public void AddHearts(int toAdd) {
+        for (var i = 0; i < toAdd; i++)
         {
-            if (i < playerHealth) {
-                GameObject newHeart = Instantiate(heart, heart.transform.position, heart.transform.rotation, heartsContainer);
-                currentHearts.Add(newHeart);
-                numOfHearts+=1;
-            } else {
-                GameObject dyingHeart = currentHearts[currentHearts.Count-1];
-                currentHearts.Remove(dyingHeart);
-                Destroy(dyingHeart);
-                numOfHearts-=1;
-            }
+            GameObject newHeart = Instantiate(heart, heart.transform.position, heart.transform.rotation, heartsContainer);
+            currentHearts.Add(newHeart);
+            numOfHearts+=1;
+        }
+    }
+    public void RemoveHearts(int toRemove) {
+        for (var i = 1; i < (toRemove + 1); i++)
+        {
+            GameObject dyingHeart = currentHearts[currentHearts.Count - i];
+            currentHearts.Remove(dyingHeart);
+            Destroy(dyingHeart);
+            numOfHearts-=1;
         }
     }
 }

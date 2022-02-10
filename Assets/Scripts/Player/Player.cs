@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -153,6 +154,8 @@ public class Player : MonoBehaviour
         healthUI.RemoveHearts(damage);
         Stun();
         anim.SetTrigger("takeDamage");
+
+
     }
 
     bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
@@ -172,5 +175,12 @@ public class Player : MonoBehaviour
     }
     public void ResetStun() {
         isStunned = false;
+        if (health <= 0) {
+            Die();
+        }
+    }
+
+    void Die() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

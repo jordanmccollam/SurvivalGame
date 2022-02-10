@@ -768,6 +768,7 @@ MonoBehaviour:
   blinkTime: 3
   health: 3
   speed: 40
+  tiptoeSpeed: 20
   jumpForce: 60
   jumpTime: 0.2
   groundCheck: {fileID: 4225210722481374109}
@@ -775,6 +776,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   checkRadius: 0.01
+  minFallDistance: 3
+  fallDamage: 1
 --- !u!50 &8360198630720488472
 Rigidbody2D:
   serializedVersion: 4
@@ -869,6 +872,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f3a7478d-b7b2-44e9-a56b-74c98eb3ef6a
     m_ActionName: Gameplay/Jump[/DualShock4GamepadHID/buttonSouth,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3175108562941336016}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: Tiptoe
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a71530e7-d774-4a0a-b306-310f1ec91080
+    m_ActionName: Gameplay/Tiptoe[/DualShock4GamepadHID/rightTrigger,/Keyboard/shift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

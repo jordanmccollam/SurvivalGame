@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     [Header("Stats")]
     public int health;
     public float speed;
+    public float tiptoeSpeed;
     public float jumpForce;
     public float jumpTime;
 
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     bool isJumping = false;
     bool facingRight = true;
     bool isGrounded = false;
+    bool isTiptoeing = false;
     // ----------
 
     // COMPONENTS ---
@@ -30,10 +32,17 @@ public class Player : MonoBehaviour
     Health healthUI;
     // --------------
 
+    // Fall damage ---
+    bool wasFalling;
+    float startOfFall;
+    // ---------------
+
     [Header("Mechanics")]
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public float checkRadius;
+    public float minFallDistance;
+    public int fallDamage;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -75,20 +84,32 @@ public class Player : MonoBehaviour
         }
         else if (!isGrounded && _isGrounded) {
             anim.SetBool("isJumping", false);
+            float fallDistance = startOfFall - transform.position.y;
+            if (fallDistance > minFallDistance) {
+                TakeDamage(fallDamage);
+            }
         }
         isGrounded = _isGrounded;
         
+
+        // Fall damage stuff
+        if (!wasFalling && isFalling) startOfFall = transform.position.y;
     }
 
     void Move() {
         // Move horizontally only
-        rb.velocity = new Vector2(Mathf.Round(input.x) * speed, rb.velocity.y);
+        rb.velocity = new Vector2(Mathf.Round(input.x) * (isTiptoeing ? tiptoeSpeed : speed), rb.velocity.y);
 
         // if moving, use run anim
         if (input.x == 0) { 
+            anim.SetBool("isTiptoeing", false); 
             anim.SetBool("isRunning", false);
         } else {
-            anim.SetBool("isRunning", true);
+            if (isTiptoeing) {
+                anim.SetBool("isTiptoeing", true); 
+            } else {
+                anim.SetBool("isRunning", true);
+            }
         }
 
         // Flip sprite if necessary
@@ -123,5 +144,17 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage) {
         health -= damage;
         healthUI.UpdateUI(health);
+    }
+
+    bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
+
+    public void Tiptoe(InputAction.CallbackContext context) {
+        if (context.started) {
+            isTiptoeing = true;
+        }
+
+        if (context.canceled) {
+            isTiptoeing = false;
+        }
     }
 }

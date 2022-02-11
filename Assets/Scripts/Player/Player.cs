@@ -21,16 +21,19 @@ public class Player : MonoBehaviour
     float jumpTimeCounter;
 
     // CHECKS ---
-    bool isJumping = false;
+    [HideInInspector] public bool isJumping = false;
+    [HideInInspector] public bool canLedgeJump = true;
     bool facingRight = true;
     bool isGrounded = false;
     bool isTiptoeing = false;
     bool isStunned = false;
     bool isRunning = false;
+    bool isGrabbingLedge = false;
     // ----------
 
     // COMPONENTS ---
-    Animator anim;
+    [HideInInspector] public Animator anim;
+    Animator camera;
     Rigidbody2D rb;
     Health healthUI;
     [HideInInspector] public AudioManager audio;
@@ -50,6 +53,9 @@ public class Player : MonoBehaviour
     public float checkRadius;
     public float minFallDistance;
     public int fallDamage;
+    public Transform climbEndSpot;
+    public float ledgeJumpCooldown;
+    float baseGravity;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -57,6 +63,8 @@ public class Player : MonoBehaviour
         audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         healthUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<Health>();
         healthUI.AddHearts(health);
+        baseGravity = rb.gravityScale;
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 
         InvokeRepeating("Blink", blinkTime, blinkTime);
     }
@@ -72,7 +80,7 @@ public class Player : MonoBehaviour
     private void Update() {
         // If holding jump, go higher
         if (isJumping) {
-            if (jumpTimeCounter > 0) {
+            if (jumpTimeCounter > 0 && !isStunned) {
                 rb.velocity = Vector2.up * jumpForce;
                 jumpTimeCounter -= Time.deltaTime;
             } else {
@@ -80,6 +88,26 @@ public class Player : MonoBehaviour
                 isJumping = false;
             }
         }
+    }
+
+    public void GrabLedge() {
+        isGrabbingLedge = true;
+        Vector2 teleportHere = new Vector2(climbEndSpot.position.x, climbEndSpot.position.y);
+        rb.gravityScale = 0;
+        Stun();
+        rb.velocity = Vector2.zero;
+        transform.position = teleportHere;
+    }
+
+    public void LetGoOfLedge() {
+        isGrabbingLedge = false;
+        rb.gravityScale = baseGravity;
+        ResetStun();
+        Invoke("ResetLedgeJump", ledgeJumpCooldown);
+    }
+
+    void ResetLedgeJump() {
+        canLedgeJump = true;
     }
 
     private void FixedUpdate() {
@@ -116,10 +144,12 @@ public class Player : MonoBehaviour
             if (input.x == 0 && isRunning) { 
                 isRunning = false;
                 anim.SetBool("isRunning", false);
+                anim.SetBool("isTiptoeing", false);
                 audio.Stop("run");
             } else if (input.x != 0 && !isRunning) {
                 isRunning = true;
                 anim.SetBool("isRunning", true);
+                if (isTiptoeing) anim.SetBool("isTiptoeing", true);
                 audio.Loop("run");
             }
 
@@ -147,7 +177,10 @@ public class Player : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context) {
-        if (context.started && isGrounded && !isStunned) { // On button down, jump
+        if (context.started && ((isGrounded && !isStunned) || isGrabbingLedge)) { // On button down, jump
+            if (isGrabbingLedge) {
+                LetGoOfLedge();
+            }
             isJumping = true;
             jumpTimeCounter = jumpTime;
             anim.SetTrigger("takeOff");

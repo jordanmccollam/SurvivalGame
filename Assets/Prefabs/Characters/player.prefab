@@ -771,6 +771,9 @@ MonoBehaviour:
   tiptoeSpeed: 15
   jumpForce: 60
   jumpTime: 0.2
+  isJumping: 0
+  canLedgeJump: 1
+  anim: {fileID: 0}
   audio: {fileID: 0}
   blood: {fileID: 1211918072761711477, guid: 6b47e79bd7fd94bf2ae2b968d3f6801d, type: 3}
   groundCheck: {fileID: 4225210722481374109}
@@ -780,6 +783,8 @@ MonoBehaviour:
   checkRadius: 0.01
   minFallDistance: 3
   fallDamage: 1
+  climbEndSpot: {fileID: 8158760715306491499}
+  ledgeJumpCooldown: 0.05
 --- !u!50 &8360198630720488472
 Rigidbody2D:
   serializedVersion: 4
@@ -799,7 +804,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 699c2b5fe2c5245828e8c893e027efa9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &3400571783580203800
 CircleCollider2D:

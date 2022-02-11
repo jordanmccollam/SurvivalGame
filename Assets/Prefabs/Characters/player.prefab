@@ -829,7 +829,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   checkRadius: 0.01
-  minFallDistance: 2
+  minFallDistance: 3
   fallDamage: 1
   climbEndSpot: {fileID: 8158760715306491499}
   ledgeJumpCooldown: 1
@@ -852,7 +852,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 699c2b5fe2c5245828e8c893e027efa9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!58 &3400571783580203800
 CircleCollider2D:

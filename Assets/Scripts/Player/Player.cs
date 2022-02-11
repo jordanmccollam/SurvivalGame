@@ -107,14 +107,9 @@ public class Player : MonoBehaviour
 
             // if moving, use run anim
             if (input.x == 0) { 
-                anim.SetBool("isTiptoeing", false); 
                 anim.SetBool("isRunning", false);
             } else {
-                if (isTiptoeing) {
-                    anim.SetBool("isTiptoeing", true); 
-                } else {
-                    anim.SetBool("isRunning", true);
-                }
+                anim.SetBool("isRunning", true);
             }
 
             // Flip sprite if necessary
@@ -165,10 +160,12 @@ public class Player : MonoBehaviour
     public void Tiptoe(InputAction.CallbackContext context) {
         if (context.started) {
             isTiptoeing = true;
+            anim.SetBool("isTiptoeing", true); 
         }
 
         if (context.canceled) {
             isTiptoeing = false;
+            anim.SetBool("isTiptoeing", false); 
         }
     }
 

@@ -777,7 +777,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   checkRadius: 0.01
-  minFallDistance: 2.7
+  minFallDistance: 3
   fallDamage: 1
 --- !u!50 &8360198630720488472
 Rigidbody2D:

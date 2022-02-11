@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4591226294085709310}
   - component: {fileID: 4861950037456386590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8158760715306491499}
   - component: {fileID: 4507204971514502817}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2275377057682374563}
   - component: {fileID: 1273963838341223811}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,7 +250,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3560263149896752514}
   - component: {fileID: 4010964023770233450}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: f hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1455906973766756036}
   - component: {fileID: 7371008837144911998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: l eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -414,7 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3661500451193134426}
   - component: {fileID: 4047301117712418122}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: r eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -496,7 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8519148543436299781}
   - component: {fileID: 8464165596718888854}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: f leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5973495696464978785}
   - component: {fileID: 4793725710470908944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: b hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4225210722481374109}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GROUND CHECK
   m_TagString: Untagged
   m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
@@ -695,7 +695,7 @@ GameObject:
   - component: {fileID: 8360198630720488472}
   - component: {fileID: 3400571783580203800}
   - component: {fileID: 6876195159145103557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -771,6 +771,7 @@ MonoBehaviour:
   tiptoeSpeed: 15
   jumpForce: 60
   jumpTime: 0.2
+  blood: {fileID: 1211918072761711477, guid: 6b47e79bd7fd94bf2ae2b968d3f6801d, type: 3}
   groundCheck: {fileID: 4225210722481374109}
   whatIsGround:
     serializedVersion: 2
@@ -903,7 +904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2424307695658507360}
   - component: {fileID: 6032640720359733009}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -985,7 +986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1027930126415133201}
   - component: {fileID: 5502411546057532524}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: b leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

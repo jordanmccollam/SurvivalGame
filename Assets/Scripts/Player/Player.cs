@@ -39,6 +39,9 @@ public class Player : MonoBehaviour
     float startOfFall;
     // ---------------
 
+    [Header("Effects")]    
+    public GameObject blood;
+
     [Header("Mechanics")]
     public Transform groundCheck;
     public LayerMask whatIsGround;
@@ -152,10 +155,9 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage) {
         health -= damage;
         healthUI.RemoveHearts(damage);
-        Stun();
         anim.SetTrigger("takeDamage");
-
-
+        Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 3f), Quaternion.identity);
+        Stun();
     }
 
     bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }

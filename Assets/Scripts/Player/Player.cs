@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
 
     // CHECKS ---
     [HideInInspector] public bool isJumping = false;
-    [HideInInspector] public bool canLedgeJump = true;
+    [HideInInspector] public bool canLedgeGrab = true;
     bool facingRight = true;
     bool isGrounded = false;
     bool isTiptoeing = false;
@@ -91,23 +91,24 @@ public class Player : MonoBehaviour
     }
 
     public void GrabLedge() {
-        isGrabbingLedge = true;
-        Vector2 teleportHere = new Vector2(climbEndSpot.position.x, climbEndSpot.position.y);
-        rb.gravityScale = 0;
-        Stun();
-        rb.velocity = Vector2.zero;
-        transform.position = teleportHere;
+        if (canLedgeGrab) {
+            canLedgeGrab = false;
+            isGrabbingLedge = true;
+            rb.gravityScale = 0;
+            Stun();
+            rb.velocity = Vector2.zero;
+        }
     }
 
     public void LetGoOfLedge() {
         isGrabbingLedge = false;
         rb.gravityScale = baseGravity;
         ResetStun();
-        Invoke("ResetLedgeJump", ledgeJumpCooldown);
+        Invoke("ResetLedgeGrab", ledgeJumpCooldown);
     }
 
-    void ResetLedgeJump() {
-        canLedgeJump = true;
+    void ResetLedgeGrab() {
+        canLedgeGrab = true;
     }
 
     private void FixedUpdate() {

@@ -5,9 +5,9 @@ using UnityEngine;
 public class Ledge : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "Player") {
-            Player playerComp = other.GetComponent<Player>();
-            if (playerComp.isJumping && playerComp.canLedgeJump) {
+        if (other.tag == "ledgeCheck") {
+            Player playerComp = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            if (playerComp.isJumping && playerComp.canLedgeGrab) {
                 playerComp.anim.SetTrigger("grabLedge");
             }
         }

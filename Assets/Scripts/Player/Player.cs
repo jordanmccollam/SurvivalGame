@@ -26,12 +26,14 @@ public class Player : MonoBehaviour
     bool isGrounded = false;
     bool isTiptoeing = false;
     bool isStunned = false;
+    bool isRunning = false;
     // ----------
 
     // COMPONENTS ---
     Animator anim;
     Rigidbody2D rb;
     Health healthUI;
+    [HideInInspector] public AudioManager audio;
     // --------------
 
     // Fall damage ---
@@ -52,6 +54,7 @@ public class Player : MonoBehaviour
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         healthUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<Health>();
         healthUI.AddHearts(health);
 
@@ -97,7 +100,11 @@ public class Player : MonoBehaviour
         isGrounded = _isGrounded;
         
         // Fall damage stuff
-        if (!wasFalling && isFalling) startOfFall = transform.position.y;
+        if (!wasFalling && isFalling) {
+            startOfFall = transform.position.y;
+            audio.Stop("run");
+            isRunning = false;
+        }
     }
 
     void Move() {
@@ -106,10 +113,14 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(Mathf.Round(input.x) * (isTiptoeing ? tiptoeSpeed : speed), rb.velocity.y);
 
             // if moving, use run anim
-            if (input.x == 0) { 
+            if (input.x == 0 && isRunning) { 
+                isRunning = false;
                 anim.SetBool("isRunning", false);
-            } else {
+                audio.Stop("run");
+            } else if (input.x != 0 && !isRunning) {
+                isRunning = true;
                 anim.SetBool("isRunning", true);
+                audio.Loop("run");
             }
 
             // Flip sprite if necessary
@@ -140,6 +151,7 @@ public class Player : MonoBehaviour
             isJumping = true;
             jumpTimeCounter = jumpTime;
             anim.SetTrigger("takeOff");
+            audio.Play("jump");
         }
 
         if (context.canceled) { // If button released, stop jumping

@@ -48,10 +48,16 @@ MonoBehaviour:
   soundMixer: {fileID: 24300002, guid: dc2603e71675c49619d520332b9e82c0, type: 2}
   playMainMusic: 0
   sounds:
+  - name: jump
+    clip: {fileID: 8300000, guid: 23a0240585c10455ba741db36e9ad7d1, type: 3}
+    volume: 0.5
+    pitch: 1.4
+    panning: 0
+    source: {fileID: 0}
   - name: run
     clip: {fileID: 8300000, guid: af136adc7757d41f6a174b8b419859cd, type: 3}
-    volume: 0.3
-    pitch: 0
+    volume: 1
+    pitch: 1
     panning: 0
     source: {fileID: 0}
   volumeRef: 5

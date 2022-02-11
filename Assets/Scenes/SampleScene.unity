@@ -440,22 +440,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4591226294085709310, guid: 0994a74d277e54c56b9fd777d59a44a6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4861950037456386590, guid: 0994a74d277e54c56b9fd777d59a44a6, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4861950037456386590, guid: 0994a74d277e54c56b9fd777d59a44a6, type: 3}
-      propertyPath: m_FalloffIntensity
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4861950037456386590, guid: 0994a74d277e54c56b9fd777d59a44a6, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7193991060959968081, guid: 0994a74d277e54c56b9fd777d59a44a6, type: 3}
       propertyPath: m_Name
       value: player
@@ -8706,18 +8690,6 @@ PrefabInstance:
     - target: {fileID: 8791014621083101261, guid: c5f2e2655765b453ea2992cf9b086a22, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791014621083101262, guid: c5f2e2655765b453ea2992cf9b086a22, type: 3}
-      propertyPath: sounds.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: d1ebb8ede648d433daa116261acd811a, type: 3}
-    - target: {fileID: 8791014621083101262, guid: c5f2e2655765b453ea2992cf9b086a22, type: 3}
-      propertyPath: sounds.Array.data[0].name
-      value: jump
-      objectReference: {fileID: 0}
-    - target: {fileID: 8791014621083101262, guid: c5f2e2655765b453ea2992cf9b086a22, type: 3}
-      propertyPath: sounds.Array.data[0].volume
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8791014621083101263, guid: c5f2e2655765b453ea2992cf9b086a22, type: 3}
       propertyPath: m_Name

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179848680871313170}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: 2.14, z: 0}
+  m_LocalPosition: {x: 0.22, y: 2.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8737340768127971410}
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 2
-  m_PointLightOuterRadius: 30
+  m_PointLightOuterRadius: 25
   m_PointLightDistance: 3
   m_PointLightQuality: 1
   m_ShapeLightParametricSides: 5
@@ -771,6 +771,7 @@ MonoBehaviour:
   tiptoeSpeed: 15
   jumpForce: 60
   jumpTime: 0.2
+  audio: {fileID: 0}
   blood: {fileID: 1211918072761711477, guid: 6b47e79bd7fd94bf2ae2b968d3f6801d, type: 3}
   groundCheck: {fileID: 4225210722481374109}
   whatIsGround:

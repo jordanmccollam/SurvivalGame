@@ -122,6 +122,13 @@ public class Player : MonoBehaviour
     private void FixedUpdate() {
         Move();
 
+        // Fall damage stuff
+        if (!wasFalling && isFalling) {
+            startOfFall = transform.position.y;
+            audio.Stop("run");
+            isRunning = false;
+        }
+
         // Check if grounded and animate accordingly
         bool _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         if (isGrounded && !_isGrounded) {
@@ -135,13 +142,6 @@ public class Player : MonoBehaviour
             }
         }
         isGrounded = _isGrounded;
-        
-        // Fall damage stuff
-        if (!wasFalling && isFalling) {
-            startOfFall = transform.position.y;
-            audio.Stop("run");
-            isRunning = false;
-        }
     }
 
     void Move() {
@@ -152,7 +152,6 @@ public class Player : MonoBehaviour
             // if moving, use run anim
             if (input.x == 0 && isRunning) { 
                 isRunning = false;
-                anim.SetBool("isRunning", false);
                 anim.SetBool("isTiptoeing", false);
                 audio.Stop("run");
             } else if (input.x != 0 && !isRunning) {
@@ -165,9 +164,14 @@ public class Player : MonoBehaviour
                 } 
             }
 
+            // Bug fixes ---
             if (input.x != 0 && isTiptoeing) {
                 audio.Stop("run");
             }
+            if (input.x == 0) {
+                anim.SetBool("isRunning", false);
+            }
+            // ------------
 
             // Flip sprite if necessary
             if (input.x > 0 && !facingRight) {

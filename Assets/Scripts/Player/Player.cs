@@ -228,7 +228,9 @@ public class Player : MonoBehaviour
     public void Tiptoe(InputAction.CallbackContext context) {
         if (context.started) {
             isTiptoeing = true;
-            anim.SetBool("isTiptoeing", true); 
+            if (isRunning) {
+                anim.SetBool("isTiptoeing", true); 
+            }
         }
 
         if (context.canceled) {

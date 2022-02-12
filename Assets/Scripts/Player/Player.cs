@@ -122,13 +122,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate() {
         Move();
 
-        // Fall damage stuff
-        if (!wasFalling && isFalling) {
-            startOfFall = transform.position.y;
-            audio.Stop("run");
-            isRunning = false;
-        }
-
         // Check if grounded and animate accordingly
         bool _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         if (isGrounded && !_isGrounded) {
@@ -140,8 +133,17 @@ public class Player : MonoBehaviour
             if (fallDistance > minFallDistance) {
                 TakeDamage(fallDamage);
             }
+            wasFalling = false;
         }
         isGrounded = _isGrounded;
+
+        // Fall damage stuff
+        if (!wasFalling && isFalling) {
+            wasFalling = true;
+            startOfFall = transform.position.y;
+            audio.Stop("run");
+            isRunning = false;
+        }
     }
 
     void Move() {

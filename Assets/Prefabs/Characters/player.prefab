@@ -825,9 +825,13 @@ MonoBehaviour:
   audio: {fileID: 0}
   blood: {fileID: 1211918072761711477, guid: 6b47e79bd7fd94bf2ae2b968d3f6801d, type: 3}
   groundCheck: {fileID: 4225210722481374109}
+  ledgeCheck: {fileID: 8251665736995656407}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  whatIsLedge:
+    serializedVersion: 2
+    m_Bits: 256
   checkRadius: 0.01
   minFallDistance: 3
   fallDamage: 1
@@ -852,7 +856,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 699c2b5fe2c5245828e8c893e027efa9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!58 &3400571783580203800
 CircleCollider2D:

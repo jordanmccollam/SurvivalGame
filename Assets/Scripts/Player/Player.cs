@@ -49,7 +49,9 @@ public class Player : MonoBehaviour
 
     [Header("Mechanics")]
     public Transform groundCheck;
+    public Transform ledgeCheck;
     public LayerMask whatIsGround;
+    public LayerMask whatIsLedge;
     public float checkRadius;
     public float minFallDistance;
     public int fallDamage;
@@ -88,6 +90,11 @@ public class Player : MonoBehaviour
                 isJumping = false;
             }
         }
+
+        bool isTouchingLedge = Physics2D.OverlapCircle(ledgeCheck.position, checkRadius, whatIsLedge);
+        if (isTouchingLedge && canLedgeGrab) {
+            GrabLedge();
+        }
     }
 
     public void GrabLedge() {
@@ -97,6 +104,7 @@ public class Player : MonoBehaviour
             rb.gravityScale = 0;
             Stun();
             rb.velocity = Vector2.zero;
+            anim.SetTrigger("grabLedge");
         }
     }
 

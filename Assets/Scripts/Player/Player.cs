@@ -158,8 +158,15 @@ public class Player : MonoBehaviour
             } else if (input.x != 0 && !isRunning) {
                 isRunning = true;
                 anim.SetBool("isRunning", true);
-                if (isTiptoeing) anim.SetBool("isTiptoeing", true);
                 audio.Loop("run");
+
+                if (isTiptoeing) {
+                    anim.SetBool("isTiptoeing", true);
+                } 
+            }
+
+            if (input.x != 0 && isTiptoeing) {
+                audio.Stop("run");
             }
 
             // Flip sprite if necessary
@@ -173,6 +180,7 @@ public class Player : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
             anim.SetBool("isTiptoeing", false); 
             anim.SetBool("isRunning", false);
+            audio.Stop("run");
         }
     }
 
@@ -219,6 +227,7 @@ public class Player : MonoBehaviour
 
         if (context.canceled) {
             isTiptoeing = false;
+            isRunning = false;
             anim.SetBool("isTiptoeing", false); 
         }
     }

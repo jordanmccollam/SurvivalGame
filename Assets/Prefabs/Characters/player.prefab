@@ -1128,6 +1128,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spear
       objectReference: {fileID: 0}
+    - target: {fileID: 5317054858847616341, guid: b711b7fcb193f4495b76b689bf26ad70, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6516700502988662954, guid: b711b7fcb193f4495b76b689bf26ad70, type: 3}
       propertyPath: m_RootOrder
       value: 0

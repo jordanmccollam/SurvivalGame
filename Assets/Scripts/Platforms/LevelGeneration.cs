@@ -15,7 +15,7 @@ public class LevelGeneration : MonoBehaviour
 
     int direction;
     float timeBtwRoom;
-    bool stopGeneration = false;
+    [HideInInspector] public bool stopGeneration = false;
     int downCounter;
 
     private void Start() {
@@ -101,6 +101,7 @@ public class LevelGeneration : MonoBehaviour
                 direction = Random.Range(1, 6);
             } else {
                 // STOP LEVEL GEN
+                transform.position = Vector2.zero;
                 stopGeneration = true;
             }
         }

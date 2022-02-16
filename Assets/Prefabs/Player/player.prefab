@@ -817,7 +817,7 @@ MonoBehaviour:
   blinkTime: 3
   health: 3
   speed: 10
-  tiptoeSpeed: 5
+  tiptoeSpeed: 4
   jumpForce: 12
   jumpTime: 0.2
   isJumping: 0

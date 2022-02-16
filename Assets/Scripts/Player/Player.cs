@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
     // COMPONENTS ---
     [HideInInspector] public Animator anim;
     Animator camera;
-    Rigidbody2D rb;
+    [HideInInspector] public Rigidbody2D rb;
     Health healthUI;
     [HideInInspector] public AudioManager audio;
     // --------------
@@ -57,6 +57,7 @@ public class Player : MonoBehaviour
     public int fallDamage;
     public Transform climbEndSpot;
     public float ledgeJumpCooldown;
+    public float deathToGameOverTime;
     float baseGravity;
 
     private void Start() {
@@ -219,11 +220,15 @@ public class Player : MonoBehaviour
         health -= damage;
         healthUI.RemoveHearts(damage);
         anim.SetTrigger("takeDamage");
-        Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 3f), Quaternion.identity);
+        Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         Stun();
+
+        if (health <= 0) {
+            Die();
+        }
     }
 
-    bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
+    public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
 
     public void Tiptoe(InputAction.CallbackContext context) {
         if (context.started) {
@@ -245,12 +250,15 @@ public class Player : MonoBehaviour
     }
     public void ResetStun() {
         isStunned = false;
-        if (health <= 0) {
-            Die();
-        }
     }
 
     void Die() {
+        anim.SetTrigger("die");
+
+        Invoke("ResetGame", deathToGameOverTime);
+    }
+
+    void ResetGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

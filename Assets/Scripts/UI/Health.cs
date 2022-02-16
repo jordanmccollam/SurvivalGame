@@ -22,7 +22,7 @@ public class Health : MonoBehaviour
     public void RemoveHearts(int toRemove) {
         for (var i = 1; i < (toRemove + 1); i++)
         {
-            GameObject dyingHeart = currentHearts[currentHearts.Count - i];
+            GameObject dyingHeart = currentHearts[currentHearts.Count - 1];
             currentHearts.Remove(dyingHeart);
             Destroy(dyingHeart);
             numOfHearts-=1;

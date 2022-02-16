@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelGeneration : MonoBehaviour
 {
+    public GameObject playerPrefab;
     public Transform[] startingPositions;
     public GameObject[] rooms; // index 0 -> LR, 1 -> LRB, 2 -> LRT, 3 -> LRBT
     public float moveAmount;
@@ -21,7 +22,8 @@ public class LevelGeneration : MonoBehaviour
     private void Start() {
         int randStartPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartPos].position;
-        Instantiate(rooms[0], transform.position, Quaternion.identity);
+        GameObject firstRoom = Instantiate(rooms[0], transform.position, Quaternion.identity);
+        Instantiate(playerPrefab, firstRoom.transform.position, Quaternion.identity);
 
         direction = Random.Range(1, 6);
     }

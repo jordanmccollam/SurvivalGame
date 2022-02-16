@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         healthUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<Health>();
-        healthUI.AddHearts(health);
+        healthUI.UpdateHealthUI(health);
         baseGravity = rb.gravityScale;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 
@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage) {
         health -= damage;
-        healthUI.RemoveHearts(damage);
+        healthUI.UpdateHealthUI(health);
         anim.SetTrigger("takeDamage");
         Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         Stun();

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelGeneration : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public Transform roomParent;
     public Transform[] startingPositions;
     public GameObject[] rooms; // index 0 -> LR, 1 -> LRB, 2 -> LRT, 3 -> LRBT
     public float moveAmount;
@@ -22,7 +23,7 @@ public class LevelGeneration : MonoBehaviour
     private void Start() {
         int randStartPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartPos].position;
-        GameObject firstRoom = Instantiate(rooms[0], transform.position, Quaternion.identity);
+        GameObject firstRoom = Instantiate(rooms[0], transform.position, Quaternion.identity, roomParent);
         Instantiate(playerPrefab, firstRoom.transform.position, Quaternion.identity);
 
         direction = Random.Range(1, 6);
@@ -46,7 +47,7 @@ public class LevelGeneration : MonoBehaviour
                 transform.position = newPos;
 
                 int rand = Random.Range(0, rooms.Length);
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                Instantiate(rooms[rand], transform.position, Quaternion.identity, roomParent);
 
                 direction = Random.Range(1, 6);
                 if (direction == 3) {
@@ -66,7 +67,7 @@ public class LevelGeneration : MonoBehaviour
                 transform.position = newPos;
 
                 int rand = Random.Range(0, rooms.Length);
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                Instantiate(rooms[rand], transform.position, Quaternion.identity, roomParent);
 
                 direction = Random.Range(3, 6);
             } else {
@@ -82,7 +83,7 @@ public class LevelGeneration : MonoBehaviour
                 if (_room.type != 1 && _room.type != 3) {
                     if (downCounter >= 2) {
                         _room.RoomDestruction();
-                        Instantiate(rooms[3], transform.position, Quaternion.identity);
+                        Instantiate(rooms[3], transform.position, Quaternion.identity, roomParent);
                     } else {
                         _room.RoomDestruction();
 
@@ -90,7 +91,7 @@ public class LevelGeneration : MonoBehaviour
                         if (randBottomRoom == 2) {
                             randBottomRoom = 1;
                         }
-                        Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity);
+                        Instantiate(rooms[randBottomRoom], transform.position, Quaternion.identity, roomParent);
                     }
                 }
 
@@ -98,7 +99,7 @@ public class LevelGeneration : MonoBehaviour
                 transform.position = newPos;
 
                 int rand = Random.Range(2, 4);
-                Instantiate(rooms[rand], transform.position, Quaternion.identity);
+                Instantiate(rooms[rand], transform.position, Quaternion.identity, roomParent);
 
                 direction = Random.Range(1, 6);
             } else {

@@ -6,6 +6,7 @@ public class SpawnRooms : MonoBehaviour
 {
     public LayerMask whatIsRoom;
     public LevelGeneration levelGen;
+    public Transform parent;
 
     void Update()
     {
@@ -13,7 +14,7 @@ public class SpawnRooms : MonoBehaviour
         if (roomDetection == null && levelGen.stopGeneration == true) {
             // SPAWN RAND ROOM
             int rand = Random.Range(0, levelGen.rooms.Length);
-            Instantiate(levelGen.rooms[rand], transform.position, Quaternion.identity);
+            Instantiate(levelGen.rooms[rand], transform.position, Quaternion.identity, parent);
             Destroy(gameObject);
         }
     }

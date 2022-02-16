@@ -818,7 +818,7 @@ MonoBehaviour:
   health: 3
   speed: 10
   tiptoeSpeed: 5
-  jumpForce: 10
+  jumpForce: 12
   jumpTime: 0.2
   isJumping: 0
   canLedgeGrab: 1

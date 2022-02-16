@@ -14,17 +14,18 @@ public class LevelGeneration : MonoBehaviour
     public float maxX;
     public float minY;
     public LayerMask room;
+    public float loadingBufferTime;
 
     int direction;
     float timeBtwRoom;
     [HideInInspector] public bool stopGeneration = false;
     int downCounter;
+    GameObject firstRoom;
 
     private void Start() {
         int randStartPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartPos].position;
-        GameObject firstRoom = Instantiate(rooms[0], transform.position, Quaternion.identity, roomParent);
-        Instantiate(playerPrefab, firstRoom.transform.position, Quaternion.identity);
+        firstRoom = Instantiate(rooms[0], transform.position, Quaternion.identity, roomParent);
 
         direction = Random.Range(1, 6);
     }
@@ -106,7 +107,13 @@ public class LevelGeneration : MonoBehaviour
                 // STOP LEVEL GEN
                 transform.position = Vector2.zero;
                 stopGeneration = true;
+                
+                Invoke("LoadLevel", loadingBufferTime);
             }
         }
+    }
+    void LoadLevel() {
+        Instantiate(playerPrefab, firstRoom.transform.position, Quaternion.identity);
+        GameObject.FindGameObjectWithTag("Loader").SetActive(false);
     }
 }

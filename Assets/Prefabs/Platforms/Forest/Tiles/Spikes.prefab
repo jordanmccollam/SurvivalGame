@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 721670bbaeb474b20b3037b78fd784ad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -389,7 +389,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 0b0b914790ed44a4eac6755f00c4c851, type: 3}
   m_Color: {r: 0.6465953, g: 0.72300005, b: 0.19665597, a: 1}
   m_FlipX: 0
@@ -480,6 +480,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.29509434
       objectReference: {fileID: 0}
+    - target: {fileID: 2479348960998188477, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
       propertyPath: m_Name
       value: Spikes
@@ -490,8 +494,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
+--- !u!1 &926192367763986955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
+  m_PrefabInstance: {fileID: 8989956101061476973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6720195668515050263 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2414020846916292986, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
   m_PrefabInstance: {fileID: 8989956101061476973}
   m_PrefabAsset: {fileID: 0}
+--- !u!210 &1188529889778528580
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 926192367763986955}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 8

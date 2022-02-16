@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 2347943776085525707}
   - component: {fileID: 2557389250902913036}
   - component: {fileID: 5523729858198419888}
+  - component: {fileID: 5065692103632565238}
   m_Layer: 6
   m_Name: Grass Tile
   m_TagString: Untagged
@@ -154,7 +155,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: fab06e0be9375cc4d823efa71629885c, type: 3}
   m_Color: {r: 0.29509434, g: 0.34, b: 0.038490556, a: 1}
   m_FlipX: 0
@@ -192,3 +193,14 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!210 &5065692103632565238
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146170855045434839}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 8

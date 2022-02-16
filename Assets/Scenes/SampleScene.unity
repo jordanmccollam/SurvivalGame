@@ -5530,7 +5530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063121485935537183, guid: e815e0b01b12c46608b8294332cf3f94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 2063121486556365684, guid: e815e0b01b12c46608b8294332cf3f94, type: 3}
       propertyPath: m_Color.b
@@ -5550,7 +5550,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2063121486556365690, guid: e815e0b01b12c46608b8294332cf3f94, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2063121486556365691, guid: e815e0b01b12c46608b8294332cf3f94, type: 3}
       propertyPath: m_Layer

@@ -29,7 +29,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671728379474609335}
-  m_RootOrder: 35
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9133836909388360337
 MonoBehaviour:
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
 --- !u!1 &759026346190728558
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,8 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
-  - {fileID: 926192367763986955, guid: a0aca729325814e1481a34bca3e9bd39, type: 3}
 --- !u!1 &1278121796605348025
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,7 +166,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671728379474609335}
-  m_RootOrder: 33
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1426848847388653242
 MonoBehaviour:
@@ -185,7 +182,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
 --- !u!1 &3065592662009705304
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,8 +227,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
-  - {fileID: 926192367763986955, guid: a0aca729325814e1481a34bca3e9bd39, type: 3}
 --- !u!1 &3859316729938176074
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +256,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671728379474609335}
-  m_RootOrder: 37
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8103926388973614561
 MonoBehaviour:
@@ -325,8 +319,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
-  - {fileID: 926192367763986955, guid: a0aca729325814e1481a34bca3e9bd39, type: 3}
 --- !u!1 &4234046924068803207
 GameObject:
   m_ObjectHideFlags: 0
@@ -356,7 +348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671728379474609335}
-  m_RootOrder: 36
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6667817573596911933
 MonoBehaviour:
@@ -372,7 +364,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
 --- !u!1 &5739948784929382811
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,8 +409,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
-  - {fileID: 926192367763986955, guid: a0aca729325814e1481a34bca3e9bd39, type: 3}
 --- !u!1 &8371375981276354362
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +438,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1671728379474609335}
-  m_RootOrder: 34
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8787447352667918284
 MonoBehaviour:
@@ -465,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8077419770802083942, guid: 0832fc0f039804d208d75b7997f70155, type: 3}
-  - {fileID: 5986990669984701864, guid: e993d45d735994665acfe9b6ea9104d6, type: 3}
 --- !u!1001 &2971833786274472030
 PrefabInstance:
   m_ObjectHideFlags: 0

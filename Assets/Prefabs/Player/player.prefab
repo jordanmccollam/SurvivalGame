@@ -823,6 +823,7 @@ MonoBehaviour:
   isJumping: 0
   canLedgeGrab: 1
   anim: {fileID: 0}
+  rb: {fileID: 0}
   audio: {fileID: 0}
   blood: {fileID: 1211918072761711477, guid: 6b47e79bd7fd94bf2ae2b968d3f6801d, type: 3}
   groundCheck: {fileID: 4225210722481374109}

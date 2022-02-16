@@ -96,8 +96,6 @@ public class Player : MonoBehaviour
         if (isTouchingLedge && canLedgeGrab) {
             GrabLedge();
         }
-
-        Debug.Log(rb.velocity.y);
     }
 
     public void GrabLedge() {

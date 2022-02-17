@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RoomType : MonoBehaviour
 {
-    public Transform spawnLoc;
     public int type;
 
     public void RoomDestruction() {

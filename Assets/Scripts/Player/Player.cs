@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cinemachine;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
@@ -18,6 +19,7 @@ public class Player : MonoBehaviour
     public float jumpTime;
     public int food;
     public float timeToEat;
+    public float lookRange;
 
     Vector2 input;
     Vector2 lookDir;
@@ -37,6 +39,7 @@ public class Player : MonoBehaviour
     // COMPONENTS ---
     [HideInInspector] public Animator anim;
     Animator camera;
+    CinemachineFramingTransposer lookCamera;
     [HideInInspector] public Rigidbody2D rb;
     PlayerUI UI;
     [HideInInspector] public AudioManager audio;
@@ -71,6 +74,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
+        lookCamera = camera.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
 
         maxHealth = health;
         maxFood = food;
@@ -244,6 +248,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage) {
         health -= damage;
         UI.SetHealth(health);
+        camera.SetTrigger("shake");
         anim.SetTrigger("takeDamage");
         audio.Play("hurt");
         Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
@@ -293,17 +298,7 @@ public class Player : MonoBehaviour
     }
 
     void Look() {
-        float deadZone = 0.2f;
-
-        if (lookDir.y > deadZone && currentLookDir != "up") { // Looking UP
-            currentLookDir = "up";
-            Debug.Log("Looking up");
-        }
-        else if (lookDir.y < (-deadZone) && currentLookDir != "down") { // Looking DOWN
-            currentLookDir = "down";
-            Debug.Log("Looking down");
-        } else {
-            currentLookDir = "na";
-        }
+        // .45 is the default cam posY
+        lookCamera.m_ScreenY = 0.45f + (lookDir.y / lookRange);
     }
 }

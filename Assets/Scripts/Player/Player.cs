@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
     bool isGrounded = false;
     bool isTiptoeing = false;
     bool isStunned = false;
+    bool isLooking = false;
     bool isRunning = false;
     bool isGrabbingLedge = false;
     // ----------
@@ -64,7 +65,6 @@ public class Player : MonoBehaviour
     public Transform climbEndSpot;
     public float ledgeJumpCooldown;
     public float deathToGameOverTime;
-    string currentLookDir = "na";
     float baseGravity;
     int maxHealth;
     int maxFood;
@@ -298,7 +298,15 @@ public class Player : MonoBehaviour
     }
 
     void Look() {
-        // .45 is the default cam posY
-        lookCamera.m_ScreenY = 0.45f + (lookDir.y / lookRange);
+        lookCamera.m_ScreenY = 0.45f + (lookDir.y / lookRange); // .45 is the default cam posY
+
+        if (!isLooking && lookDir.y != 0) {
+            isLooking = true;
+            Stun();
+        }
+        else if (isLooking && lookDir.y == 0) {
+            isLooking = false;
+            ResetStun();
+        }
     }
 }

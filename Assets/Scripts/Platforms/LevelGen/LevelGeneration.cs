@@ -21,14 +21,15 @@ public class LevelGeneration : MonoBehaviour
     float timeBtwRoom;
     [HideInInspector] public bool stopGeneration = false;
     int downCounter;
-    GameObject firstRoom;
+    Vector2 firstRoom;
     Loader loader;
 
     private void Start() {
         loader = GameObject.FindGameObjectWithTag("Loader").GetComponent<Loader>();
         int randStartPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartPos].position;
-        firstRoom = Instantiate(startingRoom, transform.position, Quaternion.identity, roomParent);
+        GameObject firstRoomObject = Instantiate(startingRoom, transform.position, Quaternion.identity, roomParent);
+        firstRoom = firstRoomObject.transform.position;
         loader.Add(1);
 
         direction = Random.Range(1, 6);
@@ -118,7 +119,7 @@ public class LevelGeneration : MonoBehaviour
         }
     }
     void LoadLevel() {
-        Instantiate(playerPrefab, firstRoom.transform.position, Quaternion.identity);
+        Instantiate(playerPrefab, firstRoom, Quaternion.identity);
         loader.gameObject.SetActive(false);
     }
 }

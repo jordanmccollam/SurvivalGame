@@ -455,6 +455,7 @@ MonoBehaviour:
   - {fileID: 881267549326289387, guid: b6d3e3a36749c421eba8dfa4e22ed1b8, type: 3}
   - {fileID: 7480169974105392809, guid: 2436303ab65eb41a98b145e8ce2c0289, type: 3}
   - {fileID: 7403025197921816228, guid: 87d3df0a635d94d53b9a1ccba092665e, type: 3}
+  startingRoom: {fileID: 2236113105384643297, guid: d75623dbbf3374e128812d1d99bd6472, type: 3}
   moveAmount: 10
   startTimeBtwRoom: 0.25
   minX: -15

@@ -821,7 +821,7 @@ MonoBehaviour:
   jumpForce: 12
   jumpTime: 0.2
   food: 6
-  timeToEat: 30
+  timeToEat: 3
   isJumping: 0
   canLedgeGrab: 1
   anim: {fileID: 0}

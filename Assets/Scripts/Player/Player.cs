@@ -89,8 +89,8 @@ public class Player : MonoBehaviour
     }
 
     void Eat() {
-        // Player is hungry
-        if (food <= 0) {
+        // Player is hungry (and not about to die)
+        if (food <= 0 && health > 1) {
             // No food: Take damage
             TakeDamage(1);
         } else {

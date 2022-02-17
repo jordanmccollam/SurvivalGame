@@ -8,7 +8,7 @@ public class Health : MonoBehaviour
 {
     public TextMeshProUGUI health;
 
-    public void UpdateHealthUI(int updatedHealth) {
+    public void UpdateUI(int updatedHealth) {
         if (updatedHealth <= 0) {
             health.text = "0";
         } else {

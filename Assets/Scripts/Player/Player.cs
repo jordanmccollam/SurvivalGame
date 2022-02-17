@@ -16,8 +16,11 @@ public class Player : MonoBehaviour
     public float tiptoeSpeed;
     public float jumpForce;
     public float jumpTime;
+    public int food;
+    public float timeToEat;
 
     Vector2 input;
+    Vector2 lookDir;
     float jumpTimeCounter;
 
     // CHECKS ---
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public Animator anim;
     Animator camera;
     [HideInInspector] public Rigidbody2D rb;
-    Health healthUI;
+    PlayerUI UI;
     [HideInInspector] public AudioManager audio;
     // --------------
 
@@ -58,22 +61,43 @@ public class Player : MonoBehaviour
     public Transform climbEndSpot;
     public float ledgeJumpCooldown;
     public float deathToGameOverTime;
+    string currentLookDir = "na";
     float baseGravity;
+    int maxHealth;
+    int maxFood;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         audio = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
-        healthUI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<Health>();
-        healthUI.UpdateHealthUI(health);
-        baseGravity = rb.gravityScale;
         camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>();
 
+        maxHealth = health;
+        maxFood = food;
+        UI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
+        UI.SetMaxHealth(health);
+        UI.SetMaxHunger(food);
+
+        baseGravity = rb.gravityScale;
+
         InvokeRepeating("Blink", blinkTime, blinkTime);
+        InvokeRepeating("Eat", timeToEat, timeToEat);
     }
 
     void Blink() {
         anim.SetTrigger("blink");
+    }
+
+    void Eat() {
+        // Player is hungry
+        if (food <= 0) {
+            // No food: Take damage
+            TakeDamage(1);
+        } else {
+            // Eat one food
+            food--;
+            UI.SetHunger(food);
+        }
     }
 
     public void OnInput(InputAction.CallbackContext context) {
@@ -122,6 +146,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate() {
         Move();
+        Look();
 
         // Check if grounded and animate accordingly
         bool _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
@@ -218,8 +243,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage) {
         health -= damage;
-        healthUI.UpdateHealthUI(health);
+        UI.SetHealth(health);
         anim.SetTrigger("takeDamage");
+        audio.Play("hurt");
         Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         Stun();
 
@@ -260,5 +286,24 @@ public class Player : MonoBehaviour
 
     void ResetGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnLook(InputAction.CallbackContext context) {
+        lookDir = context.ReadValue<Vector2>();
+    }
+
+    void Look() {
+        float deadZone = 0.2f;
+
+        if (lookDir.y > deadZone && currentLookDir != "up") { // Looking UP
+            currentLookDir = "up";
+            Debug.Log("Looking up");
+        }
+        else if (lookDir.y < (-deadZone) && currentLookDir != "down") { // Looking DOWN
+            currentLookDir = "down";
+            Debug.Log("Looking down");
+        } else {
+            currentLookDir = "na";
+        }
     }
 }

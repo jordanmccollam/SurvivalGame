@@ -11,6 +11,7 @@ public class Ground : MonoBehaviour
     void Start()
     {
         CheckIfTop();
+        Invoke("CheckIfTop", 1f); // Second check in case a room was changed in level gen
     }
 
     void CheckIfTop() {
@@ -19,6 +20,8 @@ public class Ground : MonoBehaviour
         Collider2D groundDetection = Physics2D.OverlapBox(point, size, 0, whatIsGround);
         if (groundDetection == null) {
             top.SetActive(true);
+        } else {
+            top.SetActive(false);
         }
     }
 

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelGeneration : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject startingPlatform;
     public Transform roomParent;
     public Transform[] startingPositions;
     public GameObject[] rooms; // index 0 -> LR, 1 -> LRB, 2 -> LRT, 3 -> LRBT
@@ -120,6 +121,7 @@ public class LevelGeneration : MonoBehaviour
     }
     void LoadLevel() {
         Instantiate(playerPrefab, firstRoom, Quaternion.identity);
+        Instantiate(startingPlatform, new Vector2(firstRoom.x, firstRoom.y - 1f), Quaternion.identity);
         loader.gameObject.SetActive(false);
     }
 }

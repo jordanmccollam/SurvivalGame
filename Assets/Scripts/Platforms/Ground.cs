@@ -18,11 +18,7 @@ public class Ground : MonoBehaviour
         Vector2 size = new Vector2(.5f, .5f);
         Collider2D groundDetection = Physics2D.OverlapBox(point, size, 0, whatIsGround);
         if (groundDetection == null) {
-            Debug.Log("is top");
             top.SetActive(true);
-        } else {
-            Debug.Log("is underground");
-            Debug.Log(groundDetection);
         }
     }
 

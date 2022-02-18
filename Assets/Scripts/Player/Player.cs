@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         }
 
         bool isTouchingLedge = Physics2D.OverlapCircle(ledgeCheck.position, checkRadius, whatIsLedge);
-        if (isTouchingLedge && canLedgeGrab) {
+        if (isTouchingLedge && canLedgeGrab && !isGrounded) {
             GrabLedge();
         }
     }

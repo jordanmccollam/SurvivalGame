@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7830986048119898876, guid: f9c1e08017a9a40d3be7c8b03aa29a0c, type: 3}
+  startingPlatform: {fileID: 7852708964042577679, guid: 6d41b9169e07a4b469368450e8211328, type: 3}
   roomParent: {fileID: 0}
   startingPositions:
   - {fileID: 2240318028678523473}

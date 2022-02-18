@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     public float tiptoeSpeed;
     public float jumpForce;
     public float jumpTime;
+    public float balloonForce;
+    public float balloonTime;
     public int food;
     public float timeToEat;
     public float lookRange;
@@ -24,9 +26,11 @@ public class Player : MonoBehaviour
     Vector2 input;
     Vector2 lookDir;
     float jumpTimeCounter;
+    float balloonTimeCounter;
 
     // CHECKS ---
     [HideInInspector] public bool isJumping = false;
+    bool isBallooning = false;
     [HideInInspector] public bool canLedgeGrab = true;
     bool facingRight = true;
     bool isGrounded = false;
@@ -35,6 +39,7 @@ public class Player : MonoBehaviour
     bool isLooking = false;
     bool isRunning = false;
     bool isGrabbingLedge = false;
+    bool wasBallooning = false;
     // ----------
 
     // COMPONENTS ---
@@ -117,6 +122,23 @@ public class Player : MonoBehaviour
             } else {
                 // When jump time runs out, stop going higher
                 isJumping = false;
+            }
+        }
+
+        // If ballooning, float up
+        if (isBallooning) {
+            isJumping = false;
+
+            if (!wasBallooning) {
+                anim.SetBool("isBallooning", true);
+            }
+
+            if (balloonTimeCounter > 0 && !isStunned) {
+                rb.velocity = Vector2.up * balloonForce;
+                balloonTimeCounter -= Time.deltaTime;
+            } else {
+                // When jump time runs out, stop going higher
+                PopBalloon();
             }
         }
 
@@ -230,10 +252,11 @@ public class Player : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context) {
-        if (context.started && ((isGrounded && !isStunned) || isGrabbingLedge)) { // On button down, jump
+        if (context.started && (((isGrounded || isBallooning) && !isStunned) || isGrabbingLedge)) { // On button down, jump
             if (isGrabbingLedge) {
                 LetGoOfLedge();
             }
+            PopBalloon();
             isJumping = true;
             jumpTimeCounter = jumpTime;
             anim.SetTrigger("takeOff");
@@ -308,5 +331,18 @@ public class Player : MonoBehaviour
             isLooking = false;
             ResetStun();
         }
+    }
+
+    public void Balloon(InputAction.CallbackContext context) {
+        if (context.started) { // On button down, jump
+            isBallooning = true;
+            balloonTimeCounter = balloonTime;
+            anim.SetTrigger("blowBalloon");
+            // TODO: Play balloon blow up sound
+        }
+    }
+    void PopBalloon() {
+        isBallooning = false;
+        anim.SetBool("isBallooning", false);
     }
 }

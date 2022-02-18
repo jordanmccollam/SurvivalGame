@@ -66,7 +66,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3034635452985477036, guid: 83a781416865a41a294e1a992bb8fff5, type: 3}
       propertyPath: m_Name
-      value: Room LRT (with steps)
+      value: Room LRT (with steps TR)
       objectReference: {fileID: 0}
     - target: {fileID: 3034635452985477039, guid: 83a781416865a41a294e1a992bb8fff5, type: 3}
       propertyPath: m_RootOrder

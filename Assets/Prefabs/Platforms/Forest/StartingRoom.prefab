@@ -632,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  playerSpawnPos: {fileID: 8021941051985751233}
 --- !u!61 &3041238574950015218
 BoxCollider2D:
   m_ObjectHideFlags: 0

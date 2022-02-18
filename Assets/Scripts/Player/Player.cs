@@ -186,7 +186,7 @@ public class Player : MonoBehaviour
                 isRunning = false;
                 anim.SetBool("isTiptoeing", false);
                 audio.Stop("run");
-            } else if (input.x != 0 && !isRunning) {
+            } else if (input.x != 0 && !isRunning && isGrounded) {
                 isRunning = true;
                 anim.SetBool("isRunning", true);
                 audio.Loop("run");
@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
             if (input.x != 0 && isTiptoeing) {
                 audio.Stop("run");
             }
-            if (input.x == 0) {
+            if (input.x == 0 || !isGrounded) {
                 anim.SetBool("isRunning", false);
             }
             // ------------

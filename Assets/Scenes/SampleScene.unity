@@ -5836,6 +5836,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level Generation
       objectReference: {fileID: 0}
+    - target: {fileID: 2240318029160583012, guid: a8c1eadbf6caf476390b3d5f80150470, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2240318029160583013, guid: a8c1eadbf6caf476390b3d5f80150470, type: 3}
       propertyPath: roomParent
       value: 

@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5930657351301831920
 Transform:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 2557389250902913036}
   - component: {fileID: 5523729858198419888}
   - component: {fileID: 5065692103632565238}
+  - component: {fileID: 651452261927976592}
   m_Layer: 6
   m_Name: Grass Tile
   m_TagString: Untagged
@@ -204,3 +205,19 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 8
+--- !u!114 &651452261927976592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146170855045434839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dde0f7eaf3a64985a95ef1f4d8999d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  top: {fileID: 2112736350874692593}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64

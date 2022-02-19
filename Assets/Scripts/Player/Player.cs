@@ -126,6 +126,12 @@ public class Player : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
+        if (coyoteTimeCounter <= 0 && !isGrabbingLedge) {
+            rb.gravityScale = baseGravity;
+        } else {
+            rb.gravityScale = 0;
+        }
+
         // If holding jump, go higher
         if (isJumping) {
             if (jumpTimeCounter > 0 && !isStunned) {

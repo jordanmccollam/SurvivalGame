@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public int food;
     public float timeToEat;
     public float lookRange;
+    public int balloons;
 
     Vector2 input;
     Vector2 lookDir;
@@ -86,6 +87,7 @@ public class Player : MonoBehaviour
         UI = GameObject.FindGameObjectWithTag("PlayerUI").GetComponent<PlayerUI>();
         UI.SetMaxHealth(health);
         UI.SetMaxHunger(food);
+        UI.SetBalloonCount(balloons);
 
         baseGravity = rb.gravityScale;
 
@@ -334,11 +336,14 @@ public class Player : MonoBehaviour
     }
 
     public void Balloon(InputAction.CallbackContext context) {
-        if (context.started) { // On button down, jump
+        if (context.started && balloons > 0) { // On button down, blow balloon
             isBallooning = true;
             balloonTimeCounter = balloonTime;
             anim.SetTrigger("blowBalloon");
             // TODO: Play balloon blow up sound
+
+            balloons--;
+            UI.SetBalloonCount(balloons);
         }
     }
     void PopBalloon() {

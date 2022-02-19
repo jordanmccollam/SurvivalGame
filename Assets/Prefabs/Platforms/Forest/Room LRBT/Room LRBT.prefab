@@ -887,7 +887,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawn Point (8)
   m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -922,6 +922,7 @@ MonoBehaviour:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
   - {fileID: 4578516961015368976, guid: 2cba8653009e9447badcf3985fa52c23, type: 3}
+  - {fileID: 6845746241270623298, guid: 2e0622396d2564c0688d787f6d579deb, type: 3}
 --- !u!1 &8463034505978484896
 GameObject:
   m_ObjectHideFlags: 0

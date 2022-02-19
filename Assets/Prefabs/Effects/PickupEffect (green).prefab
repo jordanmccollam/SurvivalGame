@@ -56,6 +56,10 @@ PrefabInstance:
       value: PickupEffect (green)
       objectReference: {fileID: 0}
     - target: {fileID: 8612182746061868486, guid: da979880041db44c9a65561e8c63cc4c, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612182746061868486, guid: da979880041db44c9a65561e8c63cc4c, type: 3}
       propertyPath: InitialModule.startColor.maxColor.a
       value: 1
       objectReference: {fileID: 0}

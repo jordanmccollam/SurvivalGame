@@ -285,7 +285,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
+    public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0 && !isBallooning); } }
 
     public void Tiptoe(InputAction.CallbackContext context) {
         if (context.started) {

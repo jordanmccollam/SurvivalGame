@@ -60,6 +60,7 @@ MonoBehaviour:
   drops:
   - {fileID: 2268355122496554117, guid: 29bc61955fcd24ebe951675919bb05da, type: 3}
   - {fileID: 5802526881814085827, guid: f44c31da6ec9b46eda82eefee4a1e7b8, type: 3}
+  - {fileID: 1611887638024593939, guid: 0601b7ebd694c4da58e38b68cb1c8948, type: 3}
   breakEffect: {fileID: 5265499117249225566, guid: 2d3e0075f38374996b2f2bbb2bec4fab, type: 3}
   dropOffScaleY: 0.87
 --- !u!58 &5796817436805730649

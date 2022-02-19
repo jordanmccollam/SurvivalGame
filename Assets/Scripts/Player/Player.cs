@@ -117,8 +117,12 @@ public class Player : MonoBehaviour
     }
 
     public void PickUpFood(int amount) {
-        food += amount;
-        UI.SetHunger(food);
+        if (food < maxFood) {
+            food += amount;
+            UI.SetHunger(food);
+        }
+
+        // TODO: Add pickup food sound
 
         // Reset the eating timer
         CancelInvoke("Eat");
@@ -128,6 +132,15 @@ public class Player : MonoBehaviour
     public void PickUpBalloons(int amount) {
         balloons += amount;
         UI.SetBalloonCount(balloons);
+        // TODO: Add pickup balloon sound
+    }
+
+    public void PickUpHearts(int amount) {
+        if (health < maxHealth) {
+            health += amount;
+            UI.SetHealth(health);
+        }
+        // TODO: Add gain health sound
     }
 
     public void OnInput(InputAction.CallbackContext context) {

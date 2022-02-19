@@ -125,6 +125,11 @@ public class Player : MonoBehaviour
         InvokeRepeating("Eat", timeToEat, timeToEat);
     }
 
+    public void PickUpBalloons(int amount) {
+        balloons += amount;
+        UI.SetBalloonCount(balloons);
+    }
+
     public void OnInput(InputAction.CallbackContext context) {
         input = context.ReadValue<Vector2>();
     }

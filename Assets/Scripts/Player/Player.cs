@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     public float lookRange;
     public int balloons;
     public float punchTime;
+    public int coins;
 
     Vector2 input;
     Vector2 lookDir;
@@ -93,6 +94,7 @@ public class Player : MonoBehaviour
         UI.SetMaxHealth(health);
         UI.SetMaxHunger(food);
         UI.SetBalloonCount(balloons);
+        UI.SetBalloonCount(coins);
 
         baseGravity = rb.gravityScale;
 
@@ -141,6 +143,12 @@ public class Player : MonoBehaviour
             UI.SetHealth(health);
         }
         // TODO: Add gain health sound
+    }
+
+    public void PickUpCoins(int amount) {
+        coins += amount;
+        UI.SetCoinCount(coins);
+        // TODO: Add gain coin sound
     }
 
     public void OnInput(InputAction.CallbackContext context) {

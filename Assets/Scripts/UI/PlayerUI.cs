@@ -9,6 +9,7 @@ public class PlayerUI : MonoBehaviour
     public Slider health;
     public Slider hunger;
     public TextMeshProUGUI balloonCount;
+    public TextMeshProUGUI coinCount;
 
     public void SetHealth(int value) {
         health.value = value;
@@ -28,5 +29,9 @@ public class PlayerUI : MonoBehaviour
 
     public void SetBalloonCount(int count) {
         balloonCount.text = count.ToString();
+    }
+
+    public void SetCoinCount(int count) {
+        coinCount.text = count.ToString();
     }
 }

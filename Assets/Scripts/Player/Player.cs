@@ -116,6 +116,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void PickUpFood(int amount) {
+        food += amount;
+        UI.SetHunger(food);
+
+        // Reset the eating timer
+        CancelInvoke("Eat");
+        InvokeRepeating("Eat", timeToEat, timeToEat);
+    }
+
     public void OnInput(InputAction.CallbackContext context) {
         input = context.ReadValue<Vector2>();
     }
@@ -383,6 +392,7 @@ public class Player : MonoBehaviour
     void Punch() {
         if (!isPunching) {
             isPunching = true;
+            camera.SetTrigger("shake");
             anim.SetBool("isPunching", true);
             Invoke("StopPunch", punchTime);
         }

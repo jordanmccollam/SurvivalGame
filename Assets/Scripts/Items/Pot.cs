@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class Pot : MonoBehaviour
 {
+    public GameObject[] drops;
+    public GameObject breakEffect;
+    public float dropOffScaleY;
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.tag == "fist") {
             Player player = other.transform.parent.GetComponent<Player>();
             if (player.isPunching) {
-                Debug.Log("Broke pot! It gave you: " + "___");
-                Destroy(gameObject);
+                BreakPot();
             }
         }
+    }
+
+    void BreakPot() {
+        Instantiate(breakEffect, transform.position, Quaternion.identity);
+
+        GameObject randDrop = drops[Random.Range(0, drops.Length)];
+        Instantiate(randDrop, transform.position, Quaternion.identity, transform.parent);
+
+        Destroy(gameObject);
     }
 }

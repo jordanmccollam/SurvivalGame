@@ -842,12 +842,13 @@ MonoBehaviour:
   balloonForce: 6
   balloonTime: 2
   food: 6
-  timeToEat: 30
+  timeToEat: 20
   lookRange: 3
   balloons: 3
   punchTime: 0.2
   isJumping: 0
   canLedgeGrab: 1
+  isPunching: 0
   anim: {fileID: 0}
   rb: {fileID: 0}
   audio: {fileID: 0}

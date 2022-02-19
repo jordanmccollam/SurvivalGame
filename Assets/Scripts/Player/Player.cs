@@ -412,12 +412,14 @@ public class Player : MonoBehaviour
             isPunching = true;
             camera.SetTrigger("shake");
             anim.SetBool("isPunching", true);
-            Invoke("StopPunch", punchTime);
+            Invoke("StopPunchAnim", punchTime);
         }
     }
 
-    void StopPunch() {
+    void StopPunchAnim() {
         anim.SetBool("isPunching", false);
+    }
+    public void StopPunch() {
         isPunching = false;
     }
 }

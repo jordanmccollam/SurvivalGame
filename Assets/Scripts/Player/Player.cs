@@ -59,6 +59,7 @@ public class Player : MonoBehaviour
 
     [Header("Effects")]    
     public GameObject blood;
+    public ParticleSystem balloonPop;
 
     [Header("Mechanics")]
     public Transform groundCheck;
@@ -309,6 +310,7 @@ public class Player : MonoBehaviour
     }
 
     void Die() {
+        Stun();
         anim.SetTrigger("die");
 
         Invoke("ResetGame", deathToGameOverTime);
@@ -347,7 +349,10 @@ public class Player : MonoBehaviour
         }
     }
     void PopBalloon() {
-        isBallooning = false;
-        anim.SetBool("isBallooning", false);
+        if (isBallooning) {
+            isBallooning = false;
+            anim.SetBool("isBallooning", false);
+            balloonPop.Play();
+        }
     }
 }

@@ -849,6 +849,7 @@ MonoBehaviour:
   climbEndSpot: {fileID: 8158760715306491499}
   ledgeJumpCooldown: 1
   deathToGameOverTime: 3
+  coyoteTime: 0.2
 --- !u!50 &8360198630720488472
 Rigidbody2D:
   serializedVersion: 4

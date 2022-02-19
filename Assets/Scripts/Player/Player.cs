@@ -72,6 +72,8 @@ public class Player : MonoBehaviour
     public Transform climbEndSpot;
     public float ledgeJumpCooldown;
     public float deathToGameOverTime;
+    public float coyoteTime;
+    float coyoteTimeCounter;
     float baseGravity;
     int maxHealth;
     int maxFood;
@@ -117,6 +119,13 @@ public class Player : MonoBehaviour
     }
 
     private void Update() {
+        // Coyote time stuff
+        if (isGrounded) {
+            coyoteTimeCounter = coyoteTime;
+        } else {
+            coyoteTimeCounter -= Time.deltaTime;
+        }
+
         // If holding jump, go higher
         if (isJumping) {
             if (jumpTimeCounter > 0 && !isStunned) {
@@ -255,7 +264,7 @@ public class Player : MonoBehaviour
     }
 
     public void Jump(InputAction.CallbackContext context) {
-        if (context.started && (((isGrounded || isBallooning) && !isStunned) || isGrabbingLedge)) { // On button down, jump
+        if (context.started && (((coyoteTimeCounter > 0 || isBallooning) && !isStunned) || isGrabbingLedge)) { // On button down, jump
             if (isGrabbingLedge) {
                 LetGoOfLedge();
             }
@@ -268,6 +277,7 @@ public class Player : MonoBehaviour
 
         if (context.canceled) { // If button released, stop jumping
             isJumping = false;
+            coyoteTimeCounter = 0;
         }
     }
 

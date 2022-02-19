@@ -8,6 +8,8 @@ TagManager:
   - AudioManager
   - ledgeCheck
   - Loader
+  - Pot
+  - fist
   layers:
   - Default
   - TransparentFX

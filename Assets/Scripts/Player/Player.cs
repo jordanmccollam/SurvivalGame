@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float timeToEat;
     public float lookRange;
     public int balloons;
+    public float punchTime;
 
     Vector2 input;
     Vector2 lookDir;
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     bool isRunning = false;
     bool isGrabbingLedge = false;
     bool wasBallooning = false;
+    [HideInInspector] public bool isPunching = false;
     // ----------
 
     // COMPONENTS ---
@@ -370,5 +372,24 @@ public class Player : MonoBehaviour
             anim.SetBool("isBallooning", false);
             balloonPop.Play();
         }
+    }
+
+    public void OnAction(InputAction.CallbackContext context) {
+        if (context.started) {
+            Punch();
+        }
+    }
+
+    void Punch() {
+        if (!isPunching) {
+            isPunching = true;
+            anim.SetBool("isPunching", true);
+            Invoke("StopPunch", punchTime);
+        }
+    }
+
+    void StopPunch() {
+        anim.SetBool("isPunching", false);
+        isPunching = false;
     }
 }

@@ -2250,6 +2250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8146170855045434839, guid: 1000432d916a04c4ea759f164276fb61, type: 3}
+  - {fileID: 4578516961015368976, guid: 2cba8653009e9447badcf3985fa52c23, type: 3}
 --- !u!1 &9168672752090787508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2386,6 +2387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
+  playerSpawnPos: {fileID: 0}
 --- !u!61 &-3890749364866356528
 BoxCollider2D:
   m_ObjectHideFlags: 0

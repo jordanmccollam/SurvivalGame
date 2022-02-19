@@ -837,7 +837,7 @@ MonoBehaviour:
   health: 3
   speed: 10
   tiptoeSpeed: 4
-  jumpForce: 12
+  jumpForce: 10
   jumpTime: 0.2
   balloonForce: 6
   balloonTime: 2
@@ -868,7 +868,7 @@ MonoBehaviour:
   climbEndSpot: {fileID: 8158760715306491499}
   ledgeJumpCooldown: 1
   deathToGameOverTime: 3
-  coyoteTime: 0.2
+  coyoteTime: 0.1
 --- !u!50 &8360198630720488472
 Rigidbody2D:
   serializedVersion: 4
@@ -884,7 +884,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 8
   m_Material: {fileID: 6200000, guid: 699c2b5fe2c5245828e8c893e027efa9, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1

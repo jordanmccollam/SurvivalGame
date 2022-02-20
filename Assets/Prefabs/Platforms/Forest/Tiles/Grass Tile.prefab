@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5930657351301831920}
   - component: {fileID: 8552484375569716606}
-  - component: {fileID: 2592145305543572828}
-  - component: {fileID: 4480031102965801532}
   m_Layer: 8
   m_Name: grass
   m_TagString: Untagged
@@ -72,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 9
   m_Sprite: {fileID: 21300000, guid: 0b0b914790ed44a4eac6755f00c4c851, type: 3}
   m_Color: {r: 0.6465953, g: 0.72300005, b: 0.19665597, a: 1}
   m_FlipX: 0
@@ -84,58 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &2592145305543572828
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112736350874692593}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 2.4, y: -0.4975245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41111565, y: 1.1421623}
-  m_EdgeRadius: 0
---- !u!61 &4480031102965801532
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2112736350874692593}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -2.4290924, y: -0.4975245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41111565, y: 1.1421623}
-  m_EdgeRadius: 0
 --- !u!1 &2451056744234004989
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +125,6 @@ GameObject:
   - component: {fileID: 2347943776085525707}
   - component: {fileID: 2557389250902913036}
   - component: {fileID: 5523729858198419888}
-  - component: {fileID: 5065692103632565238}
   - component: {fileID: 651452261927976592}
   m_Layer: 6
   m_Name: Grass Tile
@@ -280,17 +225,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!210 &5065692103632565238
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8146170855045434839}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 9
 --- !u!114 &651452261927976592
 MonoBehaviour:
   m_ObjectHideFlags: 0

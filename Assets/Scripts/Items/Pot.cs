@@ -8,16 +8,16 @@ public class Pot : MonoBehaviour
     public GameObject breakEffect;
     public float dropOffScaleY;
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        if (other.tag == "fist") {
-            Player player = other.transform.parent.GetComponent<Player>();
-            if (player.isPunching) {
-                BreakPot();
-            }
-        }
-    }
+    // private void OnTriggerEnter2D(Collider2D other) {
+    //     if (other.tag == "fist") {
+    //         Player player = other.transform.parent.GetComponent<Player>();
+    //         if (player.isPunching) {
+    //             BreakPot();
+    //         }
+    //     }
+    // }
 
-    void BreakPot() {
+    public void BreakPot() {
         Instantiate(breakEffect, transform.position, Quaternion.identity);
 
         GameObject randDrop = drops[Random.Range(0, drops.Length)];

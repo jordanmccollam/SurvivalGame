@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public int balloons;
     public float punchTime;
     public int coins;
+    public float punchRange;
 
     Vector2 input;
     Vector2 lookDir;
@@ -80,6 +81,9 @@ public class Player : MonoBehaviour
     float baseGravity;
     int maxHealth;
     int maxFood;
+    public Transform rangePoint;
+    public LayerMask breakableLayer;
+    public LayerMask enemyLayer;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -94,7 +98,7 @@ public class Player : MonoBehaviour
         UI.SetMaxHealth(health);
         UI.SetMaxHunger(food);
         UI.SetBalloonCount(balloons);
-        UI.SetBalloonCount(coins);
+        UI.SetCoinCount(coins);
 
         baseGravity = rb.gravityScale;
 
@@ -417,10 +421,23 @@ public class Player : MonoBehaviour
 
     void Punch() {
         if (!isPunching) {
+            // Play attack anim
             isPunching = true;
             camera.SetTrigger("shake");
             anim.SetBool("isPunching", true);
             Invoke("StopPunchAnim", punchTime);
+
+            // Detect enemies (or breakables) in range of attack
+            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(rangePoint.position, punchRange, enemyLayer);
+
+            // Damage or break them
+            foreach (Collider2D enemy in hitEnemies)
+            {
+                if (enemy.tag == "Pot") {
+                    Pot pot = enemy.GetComponent<Pot>();
+                    pot.BreakPot();
+                }
+            }
         }
     }
 
@@ -429,5 +446,13 @@ public class Player : MonoBehaviour
     }
     public void StopPunch() {
         isPunching = false;
+    }
+
+    void OnDrawGizmosSelected() {
+        if (rangePoint == null) {
+            return;
+        }
+
+        Gizmos.DrawWireSphere(rangePoint.position, punchRange);
     }
 }

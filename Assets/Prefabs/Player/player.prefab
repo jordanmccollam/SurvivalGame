@@ -72,6 +72,36 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &509666173316749772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2535419829856497733}
+  m_Layer: 7
+  m_Name: RangePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2535419829856497733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509666173316749772}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 6.45, y: 3.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8737340768127971410}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512428481442401145
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,10 +327,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3560263149896752514}
   - component: {fileID: 4010964023770233450}
-  - component: {fileID: 3736122814976805602}
   m_Layer: 7
   m_Name: f hand
-  m_TagString: fist
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -371,22 +400,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3736122814976805602
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4667527770120856981}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.7882762
 --- !u!1 &5214160908868246383
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +801,7 @@ Transform:
   - {fileID: 5973495696464978785}
   - {fileID: 4225210722481374109}
   - {fileID: 4591226294085709310}
+  - {fileID: 2535419829856497733}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -846,6 +860,8 @@ MonoBehaviour:
   lookRange: 3
   balloons: 3
   punchTime: 0.2
+  coins: 0
+  punchRange: 0.9
   isJumping: 0
   canLedgeGrab: 1
   isPunching: 0
@@ -869,6 +885,13 @@ MonoBehaviour:
   ledgeJumpCooldown: 1
   deathToGameOverTime: 3
   coyoteTime: 0.1
+  rangePoint: {fileID: 2535419829856497733}
+  breakableLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!50 &8360198630720488472
 Rigidbody2D:
   serializedVersion: 4

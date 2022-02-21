@@ -13,8 +13,11 @@ public class AppleTree : MonoBehaviour
     public Transform dropPos;
     public GameObject apple;
     public List<GameObject> apples;
+    Animator anim;
     
     private void Start() {
+        anim = GetComponent<Animator>();
+
         SpawnFruit();
     }
 
@@ -31,6 +34,7 @@ public class AppleTree : MonoBehaviour
     }
 
     public void ShakeTree() {
+        anim.SetTrigger("hit");
         shakeEffect.Play();
 
         if (apples.Count > 0) {

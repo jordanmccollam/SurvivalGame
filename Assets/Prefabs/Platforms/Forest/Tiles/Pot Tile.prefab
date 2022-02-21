@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7924787408456642763}
   - component: {fileID: 157363041490516343}
   - component: {fileID: 633846400760066865}
-  - component: {fileID: 5155855974105677399}
   m_Layer: 6
   m_Name: Pot Tile
   m_TagString: Untagged
@@ -124,22 +123,6 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 9
---- !u!114 &5155855974105677399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4578516961015368976}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dde0f7eaf3a64985a95ef1f4d8999d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  top: {fileID: 7819600042881659194}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &5446862130089355746
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,9 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2074688969275350071}
   - component: {fileID: 4050896512964285881}
-  - component: {fileID: 7889758696474770843}
-  - component: {fileID: 8118705199411487483}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: grass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,58 +289,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &7889758696474770843
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041254905166129974}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 2.4, y: -0.4975245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41111565, y: 1.1421623}
-  m_EdgeRadius: 0
---- !u!61 &8118705199411487483
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6041254905166129974}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -2.4290924, y: -0.4975245}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.41111565, y: 1.1421623}
-  m_EdgeRadius: 0
 --- !u!1 &7819600042881659194
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ TagManager:
   - Loader
   - Pot
   - fist
+  - Tree
+  - Apple
   layers:
   - Default
   - TransparentFX

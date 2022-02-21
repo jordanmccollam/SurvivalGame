@@ -437,6 +437,10 @@ public class Player : MonoBehaviour
                     Pot pot = enemy.GetComponent<Pot>();
                     pot.BreakPot();
                 }
+                if (enemy.tag == "Tree") {
+                    AppleTree tree = enemy.GetComponent<AppleTree>();
+                    tree.ShakeTree();
+                }
             }
         }
     }

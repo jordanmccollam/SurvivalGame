@@ -329,8 +329,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2099564796264648837}
-  m_Layer: 10
-  m_Name: Borders
+  m_Layer: 6
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -188,10 +188,6 @@ public class Player : MonoBehaviour
         if (isBallooning) {
             isJumping = false;
 
-            if (!wasBallooning) {
-                anim.SetBool("isBallooning", true);
-            }
-
             if (balloonTimeCounter > 0 && !isStunned) {
                 rb.velocity = Vector2.up * balloonForce;
                 balloonTimeCounter -= Time.deltaTime;
@@ -214,7 +210,6 @@ public class Player : MonoBehaviour
             rb.gravityScale = 0;
             Stun();
             rb.velocity = Vector2.zero;
-            anim.SetTrigger("grabLedge");
         }
     }
 
@@ -236,10 +231,10 @@ public class Player : MonoBehaviour
         // Check if grounded and animate accordingly
         bool _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
         if (isGrounded && !_isGrounded) {
-            anim.SetBool("isJumping", true);
+            // Just left the ground
         }
         else if (!isGrounded && _isGrounded) {
-            anim.SetBool("isJumping", false);
+            // Just touched the ground
             float fallDistance = startOfFall - transform.position.y;
             if (fallDistance > minFallDistance) {
                 TakeDamage(fallDamage);
@@ -265,24 +260,15 @@ public class Player : MonoBehaviour
             // if moving, use run anim
             if (input.x == 0 && isRunning) { 
                 isRunning = false;
-                anim.SetBool("isTiptoeing", false);
                 audio.Stop("run");
             } else if (input.x != 0 && !isRunning && isGrounded) {
                 isRunning = true;
-                anim.SetBool("isRunning", true);
                 audio.Loop("run");
-
-                if (isTiptoeing) {
-                    anim.SetBool("isTiptoeing", true);
-                } 
             }
 
             // Bug fixes ---
             if (input.x != 0 && isTiptoeing) {
                 audio.Stop("run");
-            }
-            if (input.x == 0 || !isGrounded) {
-                anim.SetBool("isRunning", false);
             }
             // ------------
 
@@ -295,8 +281,6 @@ public class Player : MonoBehaviour
         } else {
             // If stunned, set horizontal movement to 0 and stop running anims
             rb.velocity = new Vector2(0, rb.velocity.y);
-            anim.SetBool("isTiptoeing", false); 
-            anim.SetBool("isRunning", false);
             audio.Stop("run");
         }
     }
@@ -318,7 +302,6 @@ public class Player : MonoBehaviour
             PopBalloon();
             isJumping = true;
             jumpTimeCounter = jumpTime;
-            anim.SetTrigger("takeOff");
             audio.Play("jump");
         }
 
@@ -332,7 +315,6 @@ public class Player : MonoBehaviour
         health -= damage;
         UI.SetHealth(health);
         camera.SetTrigger("shake");
-        anim.SetTrigger("takeDamage");
         audio.Play("hurt");
         Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         Stun();
@@ -347,15 +329,11 @@ public class Player : MonoBehaviour
     public void Tiptoe(InputAction.CallbackContext context) {
         if (context.started) {
             isTiptoeing = true;
-            if (isRunning) {
-                anim.SetBool("isTiptoeing", true); 
-            }
         }
 
         if (context.canceled) {
             isTiptoeing = false;
             isRunning = false;
-            anim.SetBool("isTiptoeing", false); 
         }
     }
 
@@ -398,7 +376,6 @@ public class Player : MonoBehaviour
         if (context.started && balloons > 0) { // On button down, blow balloon
             isBallooning = true;
             balloonTimeCounter = balloonTime;
-            anim.SetTrigger("blowBalloon");
             // TODO: Play balloon blow up sound
 
             balloons--;
@@ -408,7 +385,6 @@ public class Player : MonoBehaviour
     void PopBalloon() {
         if (isBallooning) {
             isBallooning = false;
-            anim.SetBool("isBallooning", false);
             balloonPop.Play();
         }
     }
@@ -424,7 +400,6 @@ public class Player : MonoBehaviour
             // Play attack anim
             isPunching = true;
             camera.SetTrigger("shake");
-            anim.SetBool("isPunching", true);
             Invoke("StopPunchAnim", punchTime);
 
             // Detect enemies (or breakables) in range of attack
@@ -446,7 +421,7 @@ public class Player : MonoBehaviour
     }
 
     void StopPunchAnim() {
-        anim.SetBool("isPunching", false);
+        // anim.SetBool("isPunching", false);
     }
     public void StopPunch() {
         isPunching = false;
@@ -458,5 +433,6 @@ public class Player : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(rangePoint.position, punchRange);
+        Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
     }
 }

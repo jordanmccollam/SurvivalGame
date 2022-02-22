@@ -11,7 +11,7 @@ public class Ground : MonoBehaviour
     void Start()
     {
         CheckIfTop();
-        Invoke("CheckIfTop", 1f); // Second check in case a room was changed in level gen
+        Invoke("CheckIfTop", 3f); // Second check in case a room was changed in level gen
     }
 
     void CheckIfTop() {

@@ -373,18 +373,14 @@ public class Player : MonoBehaviour
 
     public void Balloon(InputAction.CallbackContext context) {
         if (context.started && balloons > 0) { // On button down, blow balloon
-            isBallooning = true;
-            balloonTimeCounter = balloonTime;
-            // TODO: Play balloon blow up sound
-
+            SetState(state.FLOATING);
             balloons--;
             UI.SetBalloonCount(balloons);
         }
     }
     void PopBalloon() {
         if (isBallooning) {
-            isBallooning = false;
-            balloonPop.Play();
+            SetState(state.IDLE);
         }
     }
 
@@ -453,6 +449,11 @@ public class Player : MonoBehaviour
             case state.SNEAKING:
                 anim.SetBool("isTiptoeing", false);
                 break;
+            case state.FLOATING:
+                isBallooning = false;
+                anim.SetBool("isBallooning", false);
+                balloonPop.Play();
+                break;
             default:
                 break;
         }
@@ -486,6 +487,16 @@ public class Player : MonoBehaviour
                 // TODO: Play land sound?
                 SetState(state.IDLE);
                 return;
+            case state.FLOATING:
+                if (!isBallooning) {
+                    // BLOW BALLOON
+                    anim.SetTrigger("blowBalloon");
+                    // TODO: Play balloon blow up sound
+                } 
+                anim.SetBool("isBallooning", true);
+                isBallooning = true;
+                balloonTimeCounter = balloonTime;
+                break;
             default:
                 break;
         }

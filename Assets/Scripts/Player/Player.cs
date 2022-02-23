@@ -299,6 +299,7 @@ public class Player : MonoBehaviour
         health -= damage;
         UI.SetHealth(health);
         camera.SetTrigger("shake");
+        anim.SetTrigger("takeDamage");
         audio.Play("hurt");
         Instantiate(blood, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
         Stun();

@@ -66,4 +66,46 @@ MonoBehaviour:
     pitch: 1
     panning: 0
     source: {fileID: 0}
+  - name: blowBalloon
+    clip: {fileID: 8300000, guid: 0ef1a7240840a4589ad111adf3f58078, type: 3}
+    volume: 0.4
+    pitch: 1
+    panning: 0
+    source: {fileID: 0}
+  - name: pop
+    clip: {fileID: 8300000, guid: 304b5c60810db4738ad88c1fe2ef6166, type: 3}
+    volume: 0.4
+    pitch: 0.8
+    panning: 0
+    source: {fileID: 0}
+  - name: land
+    clip: {fileID: 8300000, guid: 37165220b9a024c7b8bee662d2748260, type: 3}
+    volume: 0.1
+    pitch: 1.5
+    panning: 0
+    source: {fileID: 0}
+  - name: shatter
+    clip: {fileID: 8300000, guid: a66fec94b6a5442628fffb5f827a504c, type: 3}
+    volume: 0.3
+    pitch: 1
+    panning: 0
+    source: {fileID: 0}
+  - name: punch
+    clip: {fileID: 8300000, guid: cdd1134f4155e471eb10a16b16414a65, type: 3}
+    volume: 0.6
+    pitch: 1
+    panning: 0
+    source: {fileID: 0}
+  - name: bonus
+    clip: {fileID: 8300000, guid: 99d547cd9ba5d4d39a09173736cff06c, type: 3}
+    volume: 0.15
+    pitch: 1
+    panning: 0
+    source: {fileID: 0}
+  - name: bite
+    clip: {fileID: 8300000, guid: bd3eb7dc5e7ae4d128e0a4fb46d4b70c, type: 3}
+    volume: 0.3
+    pitch: 1
+    panning: 0
+    source: {fileID: 0}
   volumeRef: 5

@@ -86,7 +86,7 @@ public class Player : MonoBehaviour
     public LayerMask enemyLayer;
     state currentState = state.IDLE;
 
-    enum state { IDLE, RUNNING, JUMPING, FALLING, FLOATING, LANDING, SNEAKING }
+    enum state { IDLE, RUNNING, JUMPING, FALLING, FLOATING, LANDING, SNEAKING, PUNCHING, GRABBINGLEDGE, DEAD }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour
             UI.SetHunger(food);
         }
 
-        // TODO: Add pickup food sound
+        audio.Play("bite");
 
         // Reset the eating timer
         CancelInvoke("Eat");
@@ -141,7 +141,7 @@ public class Player : MonoBehaviour
     public void PickUpBalloons(int amount) {
         balloons += amount;
         UI.SetBalloonCount(balloons);
-        // TODO: Add pickup balloon sound
+        audio.Play("bonus");
     }
 
     public void PickUpHearts(int amount) {
@@ -149,13 +149,13 @@ public class Player : MonoBehaviour
             health += amount;
             UI.SetHealth(health);
         }
-        // TODO: Add gain health sound
+        audio.Play("bonus");
     }
 
     public void PickUpCoins(int amount) {
         coins += amount;
         UI.SetCoinCount(coins);
-        // TODO: Add gain coin sound
+        audio.Play("bonus");
     }
 
     public void OnInput(InputAction.CallbackContext context) {
@@ -209,19 +209,8 @@ public class Player : MonoBehaviour
 
     public void GrabLedge() {
         if (canLedgeGrab) {
-            canLedgeGrab = false;
-            isGrabbingLedge = true;
-            rb.gravityScale = 0;
-            Stun();
-            rb.velocity = Vector2.zero;
+            SetState(state.GRABBINGLEDGE);
         }
-    }
-
-    public void LetGoOfLedge() {
-        isGrabbingLedge = false;
-        rb.gravityScale = baseGravity;
-        ResetStun();
-        Invoke("ResetLedgeGrab", ledgeJumpCooldown);
     }
 
     void ResetLedgeGrab() {
@@ -297,9 +286,6 @@ public class Player : MonoBehaviour
 
     public void Jump(InputAction.CallbackContext context) {
         if (context.started && (((coyoteTimeCounter > 0 || isBallooning) && !isStunned) || isGrabbingLedge)) { // On button down, jump
-            if (isGrabbingLedge) {
-                LetGoOfLedge();
-            }
             PopBalloon();
             SetState(state.JUMPING);
         }
@@ -344,9 +330,7 @@ public class Player : MonoBehaviour
     }
 
     void Die() {
-        Stun();
-        // anim.SetTrigger("die");
-
+        SetState(state.DEAD);
         Invoke("ResetGame", deathToGameOverTime);
     }
 
@@ -392,10 +376,8 @@ public class Player : MonoBehaviour
 
     void Punch() {
         if (!isPunching) {
-            // Play attack anim
-            isPunching = true;
-            camera.SetTrigger("shake");
-            Invoke("StopPunchAnim", punchTime);
+            SetState(state.PUNCHING);
+            Invoke("StopPunching", punchTime);
 
             // Detect enemies (or breakables) in range of attack
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(rangePoint.position, punchRange, enemyLayer);
@@ -405,7 +387,7 @@ public class Player : MonoBehaviour
             {
                 if (enemy.tag == "Pot") {
                     Pot pot = enemy.GetComponent<Pot>();
-                    pot.BreakPot();
+                    pot.BreakPot(audio);
                 }
                 if (enemy.tag == "Tree") {
                     AppleTree tree = enemy.GetComponent<AppleTree>();
@@ -415,11 +397,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    void StopPunchAnim() {
-        // anim.SetBool("isPunching", false);
-    }
-    public void StopPunch() {
-        isPunching = false;
+    void StopPunching() {
+        SetState(state.IDLE);
     }
 
     void OnDrawGizmosSelected() {
@@ -452,7 +431,19 @@ public class Player : MonoBehaviour
             case state.FLOATING:
                 isBallooning = false;
                 anim.SetBool("isBallooning", false);
+                audio.Play("pop");
                 balloonPop.Play();
+                break;
+            case state.PUNCHING:
+                anim.SetBool("isPunching", false);
+                isPunching = false;
+                break;
+            case state.GRABBINGLEDGE:
+                anim.SetBool("isGrabbingLedge", false);
+                isGrabbingLedge = false;
+                rb.gravityScale = baseGravity;
+                ResetStun();
+                Invoke("ResetLedgeGrab", ledgeJumpCooldown);
                 break;
             default:
                 break;
@@ -484,18 +475,37 @@ public class Player : MonoBehaviour
                 break;
             case state.LANDING:
                 anim.SetBool("isJumping", false);
-                // TODO: Play land sound?
+                audio.Play("land");
                 SetState(state.IDLE);
                 return;
             case state.FLOATING:
                 if (!isBallooning) {
                     // BLOW BALLOON
                     anim.SetTrigger("blowBalloon");
-                    // TODO: Play balloon blow up sound
+                    audio.Play("blowBalloon");
                 } 
                 anim.SetBool("isBallooning", true);
                 isBallooning = true;
                 balloonTimeCounter = balloonTime;
+                break;
+            case state.PUNCHING:
+                isPunching = true;
+                anim.SetBool("isPunching", true);
+                camera.SetTrigger("shake");
+                audio.Play("punch");
+                break;
+            case state.GRABBINGLEDGE:
+                canLedgeGrab = false;
+                isGrabbingLedge = true;
+                rb.gravityScale = 0;
+                anim.SetBool("isGrabbingLedge", true);
+                audio.Play("land");
+                Stun();
+                rb.velocity = Vector2.zero;
+                break;
+            case state.DEAD:
+                Stun();
+                anim.SetTrigger("die");
                 break;
             default:
                 break;

@@ -17,7 +17,8 @@ public class Pot : MonoBehaviour
     //     }
     // }
 
-    public void BreakPot() {
+    public void BreakPot(AudioManager audio) {
+        audio.Play("shatter");
         Instantiate(breakEffect, transform.position, Quaternion.identity);
 
         GameObject randDrop = drops[Random.Range(0, drops.Length)];

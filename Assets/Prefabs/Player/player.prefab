@@ -745,7 +745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4225210722481374109
 Transform:
   m_ObjectHideFlags: 0
@@ -952,7 +952,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3175108562941336016}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Tiptoe
+        m_MethodName: Sneak
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

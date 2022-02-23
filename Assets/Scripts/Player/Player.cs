@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool canLedgeGrab = true;
     bool facingRight = true;
     bool isGrounded = false;
-    bool isTiptoeing = false;
+    bool isSneaking = false;
     bool isStunned = false;
     bool isLooking = false;
     bool isRunning = false;
@@ -84,6 +84,9 @@ public class Player : MonoBehaviour
     public Transform rangePoint;
     public LayerMask breakableLayer;
     public LayerMask enemyLayer;
+    state currentState = state.IDLE;
+
+    enum state { IDLE, RUNNING, JUMPING, FALLING, FLOATING, LANDING, SNEAKING }
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
@@ -176,17 +179,18 @@ public class Player : MonoBehaviour
         // If holding jump, go higher
         if (isJumping) {
             if (jumpTimeCounter > 0 && !isStunned) {
-                rb.velocity = Vector2.up * jumpForce;
+                // rb.velocity = Vector2.up * jumpForce;
+                rb.velocity = new Vector2(rb.velocity.x, 1f * jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             } else {
                 // When jump time runs out, stop going higher
-                isJumping = false;
+                SetState(state.FALLING);
             }
         }
 
         // If ballooning, float up
         if (isBallooning) {
-            isJumping = false;
+            SetState(state.FLOATING);
 
             if (balloonTimeCounter > 0 && !isStunned) {
                 rb.velocity = Vector2.up * balloonForce;
@@ -234,7 +238,8 @@ public class Player : MonoBehaviour
             // Just left the ground
         }
         else if (!isGrounded && _isGrounded) {
-            // Just touched the ground
+            SetState(state.LANDING);
+
             float fallDistance = startOfFall - transform.position.y;
             if (fallDistance > minFallDistance) {
                 TakeDamage(fallDamage);
@@ -255,22 +260,18 @@ public class Player : MonoBehaviour
     void Move() {
         if (!isStunned) {
             // Move horizontally only
-            rb.velocity = new Vector2(Mathf.Round(input.x) * (isTiptoeing ? tiptoeSpeed : speed), rb.velocity.y);
+            rb.velocity = new Vector2(Mathf.Round(input.x) * (isSneaking ? tiptoeSpeed : speed), rb.velocity.y);
 
             // if moving, use run anim
-            if (input.x == 0 && isRunning) { 
-                isRunning = false;
-                audio.Stop("run");
+            if (input.x == 0 && (isRunning || isSneaking)) { 
+                SetState(state.IDLE);
             } else if (input.x != 0 && !isRunning && isGrounded) {
-                isRunning = true;
-                audio.Loop("run");
+                if (isSneaking) {
+                    SetState(state.SNEAKING);
+                } else {
+                    SetState(state.RUNNING);
+                }
             }
-
-            // Bug fixes ---
-            if (input.x != 0 && isTiptoeing) {
-                audio.Stop("run");
-            }
-            // ------------
 
             // Flip sprite if necessary
             if (input.x > 0 && !facingRight) {
@@ -300,14 +301,11 @@ public class Player : MonoBehaviour
                 LetGoOfLedge();
             }
             PopBalloon();
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
-            audio.Play("jump");
+            SetState(state.JUMPING);
         }
 
         if (context.canceled) { // If button released, stop jumping
-            isJumping = false;
-            coyoteTimeCounter = 0;
+            SetState(state.FALLING);
         }
     }
 
@@ -326,14 +324,15 @@ public class Player : MonoBehaviour
 
     public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0 && !isBallooning); } }
 
-    public void Tiptoe(InputAction.CallbackContext context) {
+    public void Sneak(InputAction.CallbackContext context) {
         if (context.started) {
-            isTiptoeing = true;
+            SetState(state.SNEAKING);
         }
 
         if (context.canceled) {
-            isTiptoeing = false;
-            isRunning = false;
+            isSneaking = false;
+            isRunning = false; // TODO: do I need this line?
+            SetState(state.IDLE);
         }
     }
 
@@ -346,7 +345,7 @@ public class Player : MonoBehaviour
 
     void Die() {
         Stun();
-        anim.SetTrigger("die");
+        // anim.SetTrigger("die");
 
         Invoke("ResetGame", deathToGameOverTime);
     }
@@ -434,5 +433,63 @@ public class Player : MonoBehaviour
 
         Gizmos.DrawWireSphere(rangePoint.position, punchRange);
         Gizmos.DrawWireSphere(groundCheck.position, checkRadius);
+    }
+
+    void SetState(state newState) {
+        if (newState == currentState) return;
+
+        // EXIT CURRENT ANIM
+        switch (currentState)
+        {
+            case state.RUNNING:
+                isRunning = false;
+                anim.SetBool("isRunning", false);
+                audio.Stop("run");
+                break;
+            case state.JUMPING:
+                isJumping = false;
+                // coyoteTimeCounter = 0; <- TODO: Do I need this line?
+                break;
+            case state.SNEAKING:
+                anim.SetBool("isTiptoeing", false);
+                break;
+            default:
+                break;
+        }
+        
+        
+        // START NEW ANIMATION
+        switch (newState)
+        {
+            case state.RUNNING:
+                isRunning = true;
+                anim.SetBool("isRunning", true);
+                audio.Loop("run");
+                break;
+            case state.JUMPING:
+                isJumping = true;
+                jumpTimeCounter = jumpTime;
+                anim.SetTrigger("takeOff");
+                anim.SetBool("isJumping", true);
+                audio.Play("jump");
+                break;
+            case state.SNEAKING:
+                isSneaking = true;
+                if (input.x != 0) {
+                    anim.SetBool("isTiptoeing", true);
+                } else {
+                    anim.SetBool("isTiptoeing", false);
+                }
+                break;
+            case state.LANDING:
+                anim.SetBool("isJumping", false);
+                // TODO: Play land sound?
+                SetState(state.IDLE);
+                return;
+            default:
+                break;
+        }
+        
+        currentState = newState;
     }
 }

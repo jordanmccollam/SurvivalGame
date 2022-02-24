@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     bool facingRight = true;
     bool isGrounded = false;
     bool isSneaking = false;
-    bool isStunned = false;
+    [HideInInspector] public bool isStunned = false;
     bool isLooking = false;
     bool isRunning = false;
     bool isGrabbingLedge = false;
@@ -393,6 +393,10 @@ public class Player : MonoBehaviour
                 if (enemy.tag == "Tree") {
                     AppleTree tree = enemy.GetComponent<AppleTree>();
                     tree.ShakeTree();
+                }
+                if (enemy.tag == "RockMonster") {
+                    RockMonster rockMonster = enemy.GetComponent<RockMonster>();
+                    rockMonster.TakeDamage(1);
                 }
             }
         }

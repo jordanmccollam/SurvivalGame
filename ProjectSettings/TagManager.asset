@@ -13,6 +13,7 @@ TagManager:
   - Tree
   - Apple
   - Enemy
+  - RockMonster
   layers:
   - Default
   - TransparentFX

@@ -22,6 +22,7 @@ public class RockMonster : MonoBehaviour
     public int damage;
     public float jumpHeight;
     Transform player;
+    Player playerComp;
     public Transform groundCheck;
     public Vector2 boxSize;
     public float timeBetweenAttacks;
@@ -46,22 +47,31 @@ public class RockMonster : MonoBehaviour
     private void Update() {
         if (player == null && GameObject.FindGameObjectWithTag("Player") != null) {
             player = GameObject.FindGameObjectWithTag("Player").transform;
+            playerComp = player.GetComponent<Player>();
         }
     }
 
     private void FixedUpdate() {
+        if (player == null) return;
+
         bool wasGrounded = isGrounded;
 
         checkingGround = Physics2D.OverlapCircle(groundCheckPoint.position, checkRadius, groundLayer);
         checkingWall = Physics2D.OverlapCircle(wallCheckPoint.position, checkRadius, groundLayer);
         isGrounded = Physics2D.OverlapBox(groundCheck.position, boxSize, 0, groundLayer);
-        canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSight, 0, playerLayer);
+
+        if (playerComp.isSneaking) {
+            Vector2 offset = new Vector2(transform.position.x + (lineOfSight.x / 4), transform.position.y);
+            Vector2 _lineOfSight = new Vector2(lineOfSight.x / 2, lineOfSight.y);
+            canSeePlayer = Physics2D.OverlapBox(offset, _lineOfSight, 0, playerLayer);
+        } else {
+            canSeePlayer = Physics2D.OverlapBox(transform.position, lineOfSight, 0, playerLayer);
+        }
 
         if (isGrounded && !wasGrounded) {
             anim.SetBool("isJumping", false);
             Invoke("ReadyAttack", timeBetweenAttacks);
         }
-
         if (!canSeePlayer && isGrounded) {
             Patrol();
         }
@@ -148,6 +158,11 @@ public class RockMonster : MonoBehaviour
         Gizmos.DrawCube(groundCheck.position, boxSize);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, lineOfSight);
+        Gizmos.DrawWireCube(transform.position, lineOfSight); // Regular line of sight
+
+        Gizmos.color = Color.yellow;
+        Vector2 offset = new Vector2(transform.position.x + (lineOfSight.x / 4), transform.position.y);
+        Vector2 _lineOfSight = new Vector2(lineOfSight.x / 2, lineOfSight.y);
+        Gizmos.DrawWireCube(offset, _lineOfSight);
     }
 }

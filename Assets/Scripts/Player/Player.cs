@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool canLedgeGrab = true;
     bool facingRight = true;
     bool isGrounded = false;
-    bool isSneaking = false;
+    [HideInInspector] public bool isSneaking = false;
     [HideInInspector] public bool isStunned = false;
     bool isLooking = false;
     bool isRunning = false;

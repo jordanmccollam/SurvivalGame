@@ -86,7 +86,7 @@
                 {
                     "name": "up",
                     "id": "97c16341-7c5c-4eae-a5ea-fbcd622f79da",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -97,7 +97,7 @@
                 {
                     "name": "down",
                     "id": "41bbcd4e-fdff-4d38-9d55-d09b751b11c2",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -183,7 +183,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "ArrowKeys",
+                    "name": "AWSD",
                     "id": "9bd4476a-d425-46de-9d2c-a3b2a6527346",
                     "path": "2DVector",
                     "interactions": "",
@@ -196,7 +196,7 @@
                 {
                     "name": "up",
                     "id": "862b984a-c514-4cda-b8b3-aa1618f1e19e",
-                    "path": "<Keyboard>/upArrow",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -207,7 +207,7 @@
                 {
                     "name": "down",
                     "id": "c8c808a9-5e28-4b71-b24d-fe3a01490c37",
-                    "path": "<Keyboard>/downArrow",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
@@ -291,6 +291,11 @@
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": true,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
                     "isOptional": true,
                     "isOR": false
                 }

@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [Header("Animations:")]
     public float blinkTime;
 
-    [Header("Stats")]
+    [Header("Stats:")]
     public int health;
     public float speed;
     public float tiptoeSpeed;
@@ -61,11 +61,11 @@ public class Player : MonoBehaviour
     float startOfFall;
     // ---------------
 
-    [Header("Effects")]    
+    [Header("Effects:")]    
     public GameObject blood;
     public ParticleSystem balloonPop;
 
-    [Header("Mechanics")]
+    [Header("Mechanics:")]
     public Transform groundCheck;
     public Transform ledgeCheck;
     public LayerMask whatIsGround;

@@ -290,7 +290,7 @@ public class Player : MonoBehaviour
             SetState(state.JUMPING);
         }
 
-        if (context.canceled) { // If button released, stop jumping
+        if (context.canceled && !isGrabbingLedge) { // If button released, stop jumping
             SetState(state.FALLING);
         }
     }

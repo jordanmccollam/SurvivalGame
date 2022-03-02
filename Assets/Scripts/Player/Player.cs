@@ -180,24 +180,11 @@ public class Player : MonoBehaviour
         if (isJumping) {
             if (jumpTimeCounter > 0 && !isStunned) {
                 // rb.velocity = Vector2.up * jumpForce;
-                rb.velocity = new Vector2(rb.velocity.x, 1f * jumpForce);
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
                 jumpTimeCounter -= Time.deltaTime;
             } else {
                 // When jump time runs out, stop going higher
                 SetState(state.FALLING);
-            }
-        }
-
-        // If ballooning, float up
-        if (isBallooning) {
-            SetState(state.FLOATING);
-
-            if (balloonTimeCounter > 0 && !isStunned) {
-                rb.velocity = Vector2.up * balloonForce;
-                balloonTimeCounter -= Time.deltaTime;
-            } else {
-                // When jump time runs out, stop going higher
-                PopBalloon();
             }
         }
 
@@ -223,17 +210,15 @@ public class Player : MonoBehaviour
 
         // Check if grounded and animate accordingly
         bool _isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        if (isGrounded && !_isGrounded) {
-            // Just left the ground
-        }
-        else if (!isGrounded && _isGrounded) {
+        if (!isGrounded && _isGrounded) {
             SetState(state.LANDING);
 
             float fallDistance = startOfFall - transform.position.y;
-            if (fallDistance > minFallDistance) {
+            if (fallDistance > minFallDistance && !wasBallooning) {
                 TakeDamage(fallDamage);
             }
             wasFalling = false;
+            wasBallooning = false;
         }
         isGrounded = _isGrounded;
 
@@ -248,8 +233,21 @@ public class Player : MonoBehaviour
 
     void Move() {
         if (!isStunned) {
-            // Move horizontally only
-            rb.velocity = new Vector2(Mathf.Round(input.x) * (isSneaking ? tiptoeSpeed : speed), rb.velocity.y);
+            // If ballooning / floating: float freely horizontally. Float up vertically unless player holding down
+            if (isBallooning) {
+                SetState(state.FLOATING);
+
+                if (balloonTimeCounter > 0 && !isStunned) {
+                    rb.velocity = new Vector2(Mathf.Round(input.x) * balloonForce, (input.y != 0 ? (Mathf.Round(input.y) * balloonForce) : (balloonForce)));
+                    balloonTimeCounter -= Time.deltaTime;
+                } else {
+                    // When jump time runs out, stop going higher
+                    PopBalloon();
+                }
+            } else {
+                // Move horizontally only
+                rb.velocity = new Vector2(Mathf.Round(input.x) * (isSneaking ? tiptoeSpeed : speed), rb.velocity.y);
+            }
 
             // if moving, use run anim
             if (input.x == 0 && (isRunning || isSneaking)) { 
@@ -309,7 +307,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0 && !isBallooning); } }
+    public bool isFalling { get { return (!isGrounded && rb.velocity.y < 0); } }
 
     public void Sneak(InputAction.CallbackContext context) {
         if (context.started) {
@@ -438,6 +436,7 @@ public class Player : MonoBehaviour
                 anim.SetBool("isBallooning", false);
                 audio.Play("pop");
                 balloonPop.Play();
+                wasBallooning = true;
                 break;
             case state.PUNCHING:
                 anim.SetBool("isPunching", false);

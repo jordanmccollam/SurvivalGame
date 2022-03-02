@@ -238,7 +238,7 @@ public class Player : MonoBehaviour
                 SetState(state.FLOATING);
 
                 if (balloonTimeCounter > 0 && !isStunned) {
-                    rb.velocity = new Vector2(Mathf.Round(input.x) * balloonForce, (input.y != 0 ? (Mathf.Round(input.y) * balloonForce) : (balloonForce)));
+                    rb.velocity = new Vector2(Mathf.Round(input.x) * balloonForce, (input.y < -0.2f ? (input.y * balloonForce) : (balloonForce)));
                     balloonTimeCounter -= Time.deltaTime;
                 } else {
                     // When jump time runs out, stop going higher
